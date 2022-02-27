@@ -1,7 +1,9 @@
-import 'package:efficient_meeting_app/login/binding.dart';
-import 'package:efficient_meeting_app/login/view.dart';
+import 'package:efficient_meeting_app/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'modules/login/binding.dart';
+import 'modules/login/view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,11 @@ class MyApp extends StatelessWidget {
       title: 'Efficient Meeting',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: CustomColors.themeColor,
+        // textTheme: GoogleFonts.latoTextTheme(
+        //   Theme.of(context)
+        //       .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
+        // ),
       ),
       initialRoute: '/login',
       getPages: [
