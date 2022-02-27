@@ -1,13 +1,15 @@
 import 'package:efficient_meeting_app/core/colors.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 import 'modules/login/binding.dart';
 import 'modules/login/view.dart';
 import 'modules/signup/view.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
