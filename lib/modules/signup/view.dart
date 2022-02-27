@@ -1,15 +1,12 @@
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:efficient_meeting_app/core/components/custom_textfield_component.dart';
 import 'package:efficient_meeting_app/core/components/logo_component.dart';
-import 'package:efficient_meeting_app/modules/signup/binding.dart';
-import 'package:efficient_meeting_app/modules/signup/view.dart';
+import 'package:efficient_meeting_app/modules/signup/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'controller.dart';
-
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  const SignupView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +23,19 @@ class LoginView extends GetView<LoginController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const CustomTextFieldComponent(label: 'Name'),
                     const CustomTextFieldComponent(label: 'Email'),
                     const CustomTextFieldComponent(label: 'Password'),
                     Obx(
                       () => CustomButtom(
-                        title: 'Login',
-                        function: controller.login,
+                        title: 'Signup',
+                        function: controller.signup,
                         loading: controller.loading.value,
                       ),
                     ),
                     const SizedBox(height: 30),
                     TextButton(
-                        onPressed: () =>
-                            Get.to(const SignupView(), binding: SignupBiding()),
-                        child: const Text('Signup'))
+                        onPressed: () => Get.back(), child: const Text('Back'))
                   ],
                 ),
               ),

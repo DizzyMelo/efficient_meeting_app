@@ -1,9 +1,11 @@
 import 'package:efficient_meeting_app/core/colors.dart';
+import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'modules/login/binding.dart';
 import 'modules/login/view.dart';
+import 'modules/signup/view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +32,11 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/login',
             page: () => const LoginView(),
-            binding: LoginBiding())
+            binding: LoginBiding()),
+        GetPage(
+            name: '/signup',
+            page: () => const SignupView(),
+            binding: SignupBiding()),
       ],
     );
   }
