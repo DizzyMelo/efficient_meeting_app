@@ -9,7 +9,13 @@ import 'package:get/get.dart';
 import 'controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
+
+  final _loginController =
+      TextEditingController(text: "daniel.melo@teste6.com");
+  final _passwordController = TextEditingController(text: "12345678");
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +27,39 @@ class LoginView extends GetView<LoginController> {
               margin: EdgeInsets.symmetric(vertical: 40),
             ),
             Form(
+              key: _formKey,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CustomTextFieldComponent(label: 'Email'),
-                    const CustomTextFieldComponent(label: 'Password'),
+                    CustomTextFieldComponent(
+                      label: 'Email',
+                      controller: _loginController,
+                      validator: controller.validateEmail,
+                    ),
+                    CustomTextFieldComponent(
+                      label: 'Password',
+                      controller: _passwordController,
+                      validator: controller.validatePassword,
+                    ),
                     Obx(
                       () => CustomButtom(
                         title: 'Login',
-                        function: controller.login,
+                        function: () {
+                          if (_formKey.currentState!.validate()) {
+                            controller.login(
+                                login: _loginController.text,
+                                password: _passwordController.text);
+                          }
+                        },
                         loading: controller.loading.value,
                       ),
                     ),
                     const SizedBox(height: 30),
                     TextButton(
                         onPressed: () =>
-                            Get.to(const SignupView(), binding: SignupBiding()),
+                            Get.to(SignupView(), binding: SignupBiding()),
                         child: const Text('Signup'))
                   ],
                 ),

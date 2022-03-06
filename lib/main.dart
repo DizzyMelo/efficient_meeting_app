@@ -9,7 +9,7 @@ import 'modules/login/view.dart';
 import 'modules/signup/view.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "config.env");
   runApp(const MyApp());
 }
 
@@ -32,13 +32,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/login',
       getPages: [
         GetPage(
-            name: '/login',
-            page: () => const LoginView(),
-            binding: LoginBiding()),
+            name: '/login', page: () => LoginView(), binding: LoginBiding()),
         GetPage(
-            name: '/signup',
-            page: () => const SignupView(),
-            binding: SignupBiding()),
+            name: '/signup', page: () => SignupView(), binding: SignupBiding()),
       ],
     );
   }

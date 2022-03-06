@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupView extends GetView<SignupController> {
-  const SignupView({Key? key}) : super(key: key);
+  SignupView({Key? key}) : super(key: key);
+
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +27,18 @@ class SignupView extends GetView<SignupController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CustomTextFieldComponent(label: 'Name'),
-                    const CustomTextFieldComponent(label: 'Email'),
-                    const CustomTextFieldComponent(label: 'Password'),
+                    CustomTextFieldComponent(
+                      label: 'Name',
+                      controller: _nameController,
+                    ),
+                    CustomTextFieldComponent(
+                      label: 'Email',
+                      controller: _emailController,
+                    ),
+                    CustomTextFieldComponent(
+                      label: 'Password',
+                      controller: _passwordController,
+                    ),
                     Obx(
                       () => CustomButtom(
                         title: 'Signup',

@@ -45,6 +45,7 @@ class ApiClient {
       String? token,
       String? preferredUrl}) async {
     final String url = buildUrl(endpoint: endpoint, preferredUrl: preferredUrl);
+    print(url);
     Map<String, dynamic>? requestHeaders = buildHeaders(token: token);
     if (headers != null) {
       requestHeaders?.addAll(headers);
@@ -63,19 +64,10 @@ class ApiClient {
       // If the exception caught is an ApiException, then it isn't actually unexpected. We just throw it again
       rethrow;
     } on DioError catch (ex) {
-      // logger.logVerbose('Unexepected exception obtained with request POST ' +
-      //     endpoint +
-      //     '\nException: ' +
-      //     ex.toString());
-
       handleError(ex.response!);
       throw CustomException("Something is wrong with your request", ex,
-          ex?.response?.statusCode ?? -1);
+          ex.response?.statusCode ?? -1);
     } catch (ex) {
-      // logger.logVerbose('Unexepected exception obtained with request POST ' +
-      //     endpoint +
-      //     '\nException: ' +
-      //     ex.toString());
       throw CustomException("Something is wrong with your request", ex, 500);
     }
   }
