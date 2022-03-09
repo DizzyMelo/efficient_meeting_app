@@ -1,5 +1,7 @@
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
 import 'package:efficient_meeting_app/core/api/response/login_reponse_model.dart';
+import 'package:efficient_meeting_app/modules/home/binding.dart';
+import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -14,7 +16,10 @@ class LoginController extends GetxController {
 
     loading.value = false;
 
-    if (response.status == 'success') {}
+    if (response.status == 'success') {
+      User.user = response.user;
+      Get.to(HomeView(), binding: HomeBiding());
+    }
   }
 
   String? validateEmail(String? email) {

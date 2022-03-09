@@ -1,5 +1,6 @@
-import 'package:efficient_meeting_app/core/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../theme/colors.dart';
 
 class CustomTextFieldComponent extends StatelessWidget {
   final String label;

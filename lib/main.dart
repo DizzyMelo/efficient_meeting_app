@@ -1,9 +1,11 @@
-import 'package:efficient_meeting_app/core/colors.dart';
+import 'package:efficient_meeting_app/modules/home/binding.dart';
+import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
+import 'core/theme/colors.dart';
 import 'modules/login/binding.dart';
 import 'modules/login/view.dart';
 import 'modules/signup/view.dart';
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
             name: '/login', page: () => LoginView(), binding: LoginBiding()),
         GetPage(
             name: '/signup', page: () => SignupView(), binding: SignupBiding()),
+        GetPage(name: '/home', page: () => HomeView(), binding: HomeBiding()),
       ],
     );
   }

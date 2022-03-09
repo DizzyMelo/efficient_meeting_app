@@ -91,4 +91,6 @@ class User {
         "status": status,
         "__v": v,
       };
+
+  static User? user;
 }

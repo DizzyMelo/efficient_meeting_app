@@ -1,7 +1,8 @@
-import 'package:efficient_meeting_app/core/colors.dart';
 import 'package:efficient_meeting_app/core/components/loading_component.dart';
-import 'package:efficient_meeting_app/core/fonts.dart';
 import 'package:flutter/material.dart';
+
+import '../theme/colors.dart';
+import '../theme/fonts.dart';
 
 class CustomButtom extends StatelessWidget {
   final String title;
