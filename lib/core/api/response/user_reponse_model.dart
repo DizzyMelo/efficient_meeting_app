@@ -1,19 +1,19 @@
 // To parse this JSON data, do
 //
-//     final loginResponseModel = loginResponseModelFromJson(jsonString);
+//     final userResponseModel = loginResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
 import 'package:efficient_meeting_app/core/api/response/response_object.dart';
 
-LoginResponseModel loginResponseModelFromJson(String str) =>
-    LoginResponseModel.fromJson(json.decode(str));
+UserResponseModel userResponseModelFromJson(String str) =>
+    UserResponseModel.fromJson(json.decode(str));
 
-String loginResponseModelToJson(LoginResponseModel data) =>
+String userResponseModelToJson(UserResponseModel data) =>
     json.encode(data.toJson());
 
-class LoginResponseModel implements ResponseObject {
-  LoginResponseModel({
+class UserResponseModel implements ResponseObject {
+  UserResponseModel({
     required this.status,
     required this.token,
     required this.user,
@@ -23,8 +23,8 @@ class LoginResponseModel implements ResponseObject {
   String token;
   User user;
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
-      LoginResponseModel(
+  factory UserResponseModel.fromJson(Map<String, dynamic> json) =>
+      UserResponseModel(
         status: json["status"],
         token: json["token"],
         user: User.fromJson(json["user"]),

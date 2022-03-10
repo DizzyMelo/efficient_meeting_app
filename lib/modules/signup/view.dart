@@ -8,9 +8,13 @@ import 'package:get/get.dart';
 class SignupView extends GetView<SignupController> {
   SignupView({Key? key}) : super(key: key);
 
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +26,27 @@ class SignupView extends GetView<SignupController> {
               margin: EdgeInsets.symmetric(vertical: 40),
             ),
             Form(
+              key: _formKey,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomTextFieldComponent(
-                      label: 'Name',
-                      controller: _nameController,
+                      label: 'First Name',
+                      controller: _firstNameController,
+                    ),
+                    CustomTextFieldComponent(
+                      label: 'Last Name',
+                      controller: _lastNameController,
                     ),
                     CustomTextFieldComponent(
                       label: 'Email',
                       controller: _emailController,
+                    ),
+                    CustomTextFieldComponent(
+                      label: 'Phone',
+                      controller: _phoneController,
                     ),
                     CustomTextFieldComponent(
                       label: 'Password',
@@ -42,7 +55,17 @@ class SignupView extends GetView<SignupController> {
                     Obx(
                       () => CustomButtom(
                         title: 'Signup',
-                        function: controller.signup,
+                        function: () {
+                          if (_formKey.currentState!.validate()) {
+                            controller.signup(
+                              _firstNameController.text,
+                              _lastNameController.text,
+                              _emailController.text,
+                              _phoneController.text,
+                              _passwordController.text,
+                            );
+                          }
+                        },
                         loading: controller.loading.value,
                       ),
                     ),

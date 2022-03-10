@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
-import '../../../core/api/response/login_reponse_model.dart';
+import '../../../core/api/response/user_reponse_model.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/fonts.dart';
 
