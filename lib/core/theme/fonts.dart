@@ -13,4 +13,10 @@ class CustomTextStyles {
   static final TextStyle button = TextStyle(color: Colors.grey[200]);
   static final TextStyle textMedium = TextStyle(
       color: CustomColors.dark, fontSize: 20, fontFamily: Fonts.regular);
+
+  static final TextStyle textTitleRegular = TextStyle(
+      color: CustomColors.dark, fontSize: 24, fontFamily: Fonts.regular);
+
+  static final TextStyle textTitleBold =
+      TextStyle(color: CustomColors.dark, fontSize: 24, fontFamily: Fonts.bold);
 }

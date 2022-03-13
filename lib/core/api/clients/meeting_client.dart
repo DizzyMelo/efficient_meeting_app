@@ -11,4 +11,21 @@ class MeetingClient extends ApiClient {
 
     return response;
   }
+
+  Future<ResponseObject> add({
+    required String title,
+    required String description,
+    required String date,
+    required String duration,
+  }) async {
+    Map<dynamic, dynamic> body = {};
+
+    var response = await super.post(
+      endpoint: _baseEndpoint,
+      body: body,
+      serializer: Meeting.fromJson,
+    );
+
+    return response;
+  }
 }

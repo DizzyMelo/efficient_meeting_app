@@ -38,7 +38,7 @@ class MeetingsResponseModel extends ResponseObject {
       };
 }
 
-class Meeting {
+class Meeting extends ResponseObject {
   Meeting({
     this.id,
     this.title,

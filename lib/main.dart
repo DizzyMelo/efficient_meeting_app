@@ -1,5 +1,7 @@
 import 'package:efficient_meeting_app/modules/home/binding.dart';
 import 'package:efficient_meeting_app/modules/home/view.dart';
+import 'package:efficient_meeting_app/modules/meeting/binding.dart';
+import 'package:efficient_meeting_app/modules/meeting/view.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/signup', page: () => SignupView(), binding: SignupBiding()),
         GetPage(name: '/home', page: () => HomeView(), binding: HomeBiding()),
+        GetPage(
+            name: '/home', page: () => MeetingView(), binding: MeetingBiding()),
       ],
     );
   }

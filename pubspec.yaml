@@ -38,6 +38,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   dio: ^4.0.4
   flutter_rating_stars: ^1.0.3+4
+  flash: ^2.0.3+2
 
 dev_dependencies:
   flutter_test:
