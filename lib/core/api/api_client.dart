@@ -45,7 +45,6 @@ class ApiClient {
       String? token,
       String? preferredUrl}) async {
     final String url = buildUrl(endpoint: endpoint, preferredUrl: preferredUrl);
-    print(url);
     Map<String, dynamic>? requestHeaders = buildHeaders(token: token);
     if (headers != null) {
       requestHeaders?.addAll(headers);

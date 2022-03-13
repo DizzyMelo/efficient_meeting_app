@@ -1,6 +1,7 @@
 import 'package:efficient_meeting_app/core/api/clients/meeting_client.dart';
-import 'package:efficient_meeting_app/core/api/response/meetings_response_model.dart';
 import 'package:get/get.dart';
+
+import '../../core/api/response/meeting/meetings_response_model.dart';
 
 class HomeController extends GetxController {
   var loading = false.obs;
@@ -15,6 +16,8 @@ class HomeController extends GetxController {
       meetingsResponseModel.value =
           await meetingClient.getAll() as MeetingsResponseModel;
     } catch (e) {
+      // GeneralUtils.showMessage(context,
+      //     message: 'Something went wrong while retrieving meetings!');
     } finally {
       loading.value = false;
     }

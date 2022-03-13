@@ -20,51 +20,66 @@ class MeetingView extends GetView<MeetingController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            const LogoComponent(
-              margin: EdgeInsets.symmetric(vertical: 40),
-            ),
-            Form(
-              key: _formKey,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextFieldComponent(
-                      label: 'Title',
-                      controller: _titleController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Description',
-                      controller: _descriptionController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Date',
-                      controller: _dateController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Duration (min)',
-                      controller: _durationController,
-                    ),
-                    Obx(
-                      () => CustomButtom(
-                        title: 'Add Meeting',
-                        function: () {
-                          if (_formKey.currentState!.validate()) {}
-                        },
-                        loading: controller.loading.value,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const LogoComponent(
+                margin: EdgeInsets.symmetric(vertical: 40),
+              ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomTextFieldComponent(
+                        label: 'Title',
+                        controller: _titleController,
+                        validator: controller.defaultTextfieldValidator,
                       ),
-                    ),
-                    const SizedBox(height: 30),
-                    TextButton(
-                        onPressed: () => Get.back(), child: const Text('Back'))
-                  ],
+                      CustomTextFieldComponent(
+                        label: 'Description',
+                        controller: _descriptionController,
+                        validator: controller.defaultTextfieldValidator,
+                      ),
+                      CustomTextFieldComponent(
+                        label: 'Date',
+                        controller: _dateController,
+                        validator: controller.defaultTextfieldValidator,
+                      ),
+                      CustomTextFieldComponent(
+                        label: 'Duration (min)',
+                        controller: _durationController,
+                        validator: controller.defaultTextfieldValidator,
+                      ),
+                      Obx(
+                        () => CustomButtom(
+                          title: 'Add Meeting',
+                          function: () {
+                            if (_formKey.currentState!.validate()) {
+                              controller.add(
+                                context,
+                                _titleController.text,
+                                _descriptionController.text,
+                                _dateController.text,
+                                _durationController.text,
+                              );
+                            }
+                          },
+                          loading: controller.loading.value,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      TextButton(
+                          onPressed: () => Get.back(),
+                          child: const Text('Back'))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

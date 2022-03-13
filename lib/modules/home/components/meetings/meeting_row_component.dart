@@ -1,5 +1,6 @@
-import 'package:efficient_meeting_app/core/api/response/meetings_response_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/api/response/meeting/meetings_response_model.dart';
 
 class MeetingRowComponent extends StatelessWidget {
   final Meeting meeting;

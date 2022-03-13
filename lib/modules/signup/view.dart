@@ -20,63 +20,66 @@ class SignupView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            const LogoComponent(
-              margin: EdgeInsets.symmetric(vertical: 40),
-            ),
-            Form(
-              key: _formKey,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextFieldComponent(
-                      label: 'First Name',
-                      controller: _firstNameController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Last Name',
-                      controller: _lastNameController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Email',
-                      controller: _emailController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Phone',
-                      controller: _phoneController,
-                    ),
-                    CustomTextFieldComponent(
-                      label: 'Password',
-                      controller: _passwordController,
-                    ),
-                    Obx(
-                      () => CustomButtom(
-                        title: 'Signup',
-                        function: () {
-                          if (_formKey.currentState!.validate()) {
-                            controller.signup(
-                              _firstNameController.text,
-                              _lastNameController.text,
-                              _emailController.text,
-                              _phoneController.text,
-                              _passwordController.text,
-                            );
-                          }
-                        },
-                        loading: controller.loading.value,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const LogoComponent(
+                margin: EdgeInsets.symmetric(vertical: 40),
+              ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomTextFieldComponent(
+                        label: 'First Name',
+                        controller: _firstNameController,
                       ),
-                    ),
-                    const SizedBox(height: 30),
-                    TextButton(
-                        onPressed: () => Get.back(), child: const Text('Back'))
-                  ],
+                      CustomTextFieldComponent(
+                        label: 'Last Name',
+                        controller: _lastNameController,
+                      ),
+                      CustomTextFieldComponent(
+                        label: 'Email',
+                        controller: _emailController,
+                      ),
+                      CustomTextFieldComponent(
+                        label: 'Phone',
+                        controller: _phoneController,
+                      ),
+                      CustomTextFieldComponent(
+                        label: 'Password',
+                        controller: _passwordController,
+                      ),
+                      Obx(
+                        () => CustomButtom(
+                          title: 'Signup',
+                          function: () {
+                            if (_formKey.currentState!.validate()) {
+                              controller.signup(
+                                _firstNameController.text,
+                                _lastNameController.text,
+                                _emailController.text,
+                                _phoneController.text,
+                                _passwordController.text,
+                              );
+                            }
+                          },
+                          loading: controller.loading.value,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      TextButton(
+                          onPressed: () => Get.back(),
+                          child: const Text('Back'))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

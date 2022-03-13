@@ -6,7 +6,7 @@ import 'package:efficient_meeting_app/modules/meeting/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/api/response/meetings_response_model.dart';
+import '../../../../core/api/response/meeting/meetings_response_model.dart';
 
 class MeetingListComponent extends StatelessWidget {
   final bool loading;

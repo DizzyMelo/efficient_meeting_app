@@ -1,6 +1,8 @@
 import 'package:efficient_meeting_app/core/api/api_client.dart';
+import 'package:efficient_meeting_app/core/api/response/user_reponse_model.dart';
 
-import '../response/meetings_response_model.dart';
+import '../response/meeting/add_meeting_response_model.dart';
+import '../response/meeting/meetings_response_model.dart';
 import '../response/response_object.dart';
 
 class MeetingClient extends ApiClient {
@@ -18,12 +20,19 @@ class MeetingClient extends ApiClient {
     required String date,
     required String duration,
   }) async {
-    Map<dynamic, dynamic> body = {};
+    Map<dynamic, dynamic> body = {
+      "title": title,
+      "description": description,
+      "date": "2022-03-02 15:00:00",
+      "host": User.user!.id,
+      "duration": int.parse(duration),
+      "topics": []
+    };
 
     var response = await super.post(
       endpoint: _baseEndpoint,
       body: body,
-      serializer: Meeting.fromJson,
+      serializer: AddMeetingResponseModel.fromJson,
     );
 
     return response;
