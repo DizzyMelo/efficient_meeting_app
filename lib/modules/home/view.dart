@@ -1,11 +1,10 @@
-import 'package:efficient_meeting_app/core/components/loading_component.dart';
-import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/home/components/home_header_component.dart';
 import 'package:efficient_meeting_app/modules/home/components/meetings/meeting_list_component.dart';
-import 'package:efficient_meeting_app/modules/home/components/tabbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../meeting/add/binding.dart';
+import '../meeting/add/view.dart';
 import 'controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -26,6 +25,10 @@ class HomeView extends GetView<HomeController> {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () =>
+                Get.to(AddMeetingView(), binding: AddMeetingBiding()),
+            child: const Icon(Icons.add)),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:efficient_meeting_app/core/api/api_client.dart';
+import 'package:efficient_meeting_app/core/api/response/meeting/detail_meeting_response_model.dart';
 import 'package:efficient_meeting_app/core/api/response/user_reponse_model.dart';
 
 import '../response/meeting/add_meeting_response_model.dart';
@@ -10,6 +11,14 @@ class MeetingClient extends ApiClient {
   Future<ResponseObject> getAll() async {
     var response = await super.get(
         endpoint: _baseEndpoint, serializer: MeetingsResponseModel.fromJson);
+
+    return response;
+  }
+
+  Future<ResponseObject> getOne(String meetingId) async {
+    var response = await super.get(
+        endpoint: '$_baseEndpoint/$meetingId',
+        serializer: DetailMeetingResponseModel.fromJson);
 
     return response;
   }

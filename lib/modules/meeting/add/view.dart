@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import 'controller.dart';
 
-class MeetingView extends GetView<MeetingController> {
-  MeetingView({Key? key}) : super(key: key);
+class AddMeetingView extends GetView<AddMeetingController> {
+  AddMeetingView({Key? key}) : super(key: key);
 
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
