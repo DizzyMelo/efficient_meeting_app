@@ -10,7 +10,7 @@ class LoadingComponent extends StatelessWidget {
     return Center(
       child: CircularProgressIndicator(
         strokeWidth: 3,
-        valueColor: AlwaysStoppedAnimation(CustomColors.secondary),
+        valueColor: AlwaysStoppedAnimation(CustomColors.accent2),
       ),
     );
   }

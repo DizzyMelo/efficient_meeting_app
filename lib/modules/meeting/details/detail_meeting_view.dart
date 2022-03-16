@@ -1,6 +1,7 @@
 import 'package:efficient_meeting_app/core/components/loading_component.dart';
 import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/core/theme/fonts.dart';
+import 'package:efficient_meeting_app/core/utils/general_utils.dart';
 import 'package:efficient_meeting_app/modules/meeting/details/components/topics_list_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class DetailMeetingView extends GetView<DetailMeetingController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: CustomColors.accent2,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -37,51 +39,22 @@ class DetailMeetingView extends GetView<DetailMeetingController> {
                                   style: CustomTextStyles.textTitleBold,
                                 ),
                                 const SizedBox(height: 10),
-                                Text(controller
-                                    .meetingResponseModel.value.data!.date!
-                                    .toString()),
-                                const SizedBox(height: 10),
                                 Text(
-                                  controller
-                                      .meetingResponseModel.value.data!.title!,
-                                  style: CustomTextStyles.textMedium,
+                                  controller.meetingResponseModel.value.data!
+                                      .description!,
+                                  style: CustomTextStyles.textSmall,
                                 ),
                               ],
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Participants',
-                                  style: CustomTextStyles.textTitleRegular,
-                                ),
-                                ParticipantsListComponents(
-                                  participants: controller.meetingResponseModel
-                                      .value.data!.participants!,
-                                )
-                              ],
-                            ),
+                          ParticipantsListComponents(
+                            participants: controller
+                                .meetingResponseModel.value.data!.participants!,
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Topics',
-                                  style: CustomTextStyles.textTitleRegular,
-                                ),
-                                TopicsListComponents(
-                                  topics: controller
-                                      .meetingResponseModel.value.data!.topics!,
-                                )
-                              ],
-                            ),
-                          ),
+                          TopicsListComponents(
+                            topics: controller
+                                .meetingResponseModel.value.data!.topics!,
+                          )
                         ],
                       ),
               ),

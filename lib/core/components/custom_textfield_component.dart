@@ -1,3 +1,4 @@
+import 'package:efficient_meeting_app/core/theme/fonts.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/colors.dart';
@@ -21,6 +22,7 @@ class CustomTextFieldComponent extends StatelessWidget {
         TextFormField(
           controller: controller,
           validator: validator,
+          style: CustomTextStyles.textMedium,
           decoration: InputDecoration(
             labelText: label,
             border: UnderlineInputBorder(

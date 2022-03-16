@@ -25,10 +25,13 @@ class MeetingListComponent extends StatelessWidget {
             style: CustomTextStyles.textTitleBold,
           ),
         ),
-        Column(
-          children: meetings
-              .map((meeting) => MeetingRowComponent(meeting: meeting))
-              .toList(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: meetings
+                .map((meeting) => MeetingRowComponent(meeting: meeting))
+                .toList(),
+          ),
         )
       ],
     );

@@ -7,7 +7,7 @@ class GeneralUtils {
       return '00-00-0000';
     }
 
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final DateFormat formatter = DateFormat('MM/dd/yyyy kk:mm');
     final String formatted = formatter.format(date);
     return formatted;
   }

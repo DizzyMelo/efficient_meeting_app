@@ -29,6 +29,7 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.4
+  expandable: ^5.0.1
   flash: ^2.0.3+2
   flutter:
     sdk: flutter
@@ -72,6 +73,27 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: RobotoMono-Light
+      fonts:
+        - asset: assets/fonts/RobotoMono/RobotoMono-Light.ttf
+
+    - family: RobotoMono-Regular
+      fonts:
+        - asset: assets/fonts/RobotoMono/RobotoMono-Regular.ttf
+
+    - family: RobotoMono-Medium
+      fonts:
+        - asset: assets/fonts/RobotoMono/RobotoMono-Medium.ttf
+
+    - family: RobotoMono-SemiBold
+      fonts:
+        - asset: assets/fonts/RobotoMono/RobotoMono-SemiBold.ttf
+        
+    - family: RobotoMono-Bold
+      fonts:
+        - asset: assets/fonts/RobotoMono/RobotoMono-Bold.ttf
+    
+    
     - family: Ubuntu-Light
       fonts:
         - asset: assets/fonts/Ubuntu-Light.ttf

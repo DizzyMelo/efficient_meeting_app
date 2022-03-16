@@ -1,3 +1,4 @@
+import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/home/components/home_header_component.dart';
 import 'package:efficient_meeting_app/modules/home/components/meetings/meeting_list_component.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,17 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: CustomColors.accent2,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const HomeHeaderComponent(),
-              Obx(() => MeetingListComponent(
-                  meetings: controller.meetingsResponseModel.value.meetings!,
-                  loading: controller.loading.value))
+              Obx(
+                () => MeetingListComponent(
+                    meetings: controller.meetingsResponseModel.value.meetings!,
+                    loading: controller.loading.value),
+              ),
             ],
           ),
         ),

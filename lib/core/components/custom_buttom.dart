@@ -17,22 +17,26 @@ class CustomButtom extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: function,
-      child: AnimatedContainer(
-        margin: const EdgeInsets.all(10),
-        duration: const Duration(milliseconds: 300),
-        height: 50,
-        width: loading ? 50 : 200,
-        decoration: BoxDecoration(
-          color: CustomColors.primary,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: loading
-              ? const LoadingComponent()
-              : Text(
-                  title,
-                  style: CustomTextStyles.button,
-                ),
+      child: Material(
+        borderRadius: BorderRadius.circular(10),
+        elevation: 5,
+        child: AnimatedContainer(
+          // margin: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 300),
+          height: 50,
+          width: loading ? 50 : 200,
+          decoration: BoxDecoration(
+            color: CustomColors.primary,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: loading
+                ? const LoadingComponent()
+                : Text(
+                    title,
+                    style: CustomTextStyles.button,
+                  ),
+          ),
         ),
       ),
     );
