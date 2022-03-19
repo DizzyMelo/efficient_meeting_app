@@ -4,6 +4,8 @@ import 'package:efficient_meeting_app/modules/home/binding.dart';
 import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:get/get.dart';
 
+import '../../core/entities/user_entity.dart';
+
 class LoginController extends GetxController {
   var loading = false.obs;
   var counter = 0.obs;

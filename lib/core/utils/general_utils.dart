@@ -12,6 +12,11 @@ class GeneralUtils {
     return formatted;
   }
 
+  static String? defaultTextfieldValidator(String? input) {
+    if (input!.isEmpty) return "The field above is required";
+    return null;
+  }
+
   static showMessage({required String message}) {
     Get.snackbar('', message);
     // showFlash(

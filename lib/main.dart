@@ -3,6 +3,8 @@ import 'package:efficient_meeting_app/modules/home/binding.dart';
 import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:efficient_meeting_app/modules/meeting/add/binding.dart';
 import 'package:efficient_meeting_app/modules/meeting/add/view.dart';
+import 'package:efficient_meeting_app/modules/participants/binding.dart';
+import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
         //       .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
         // ),
       ),
-      initialRoute: '/login',
+      initialRoute: '/add-participant',
       getPages: [
         GetPage(
             name: '/login', page: () => LoginView(), binding: LoginBiding()),
@@ -51,6 +53,10 @@ class MyApp extends StatelessWidget {
             name: '/meeting-detail',
             page: () => const DetailMeetingView(),
             binding: DetailMeetingBiding()),
+        GetPage(
+            name: '/add-participant',
+            page: () => AddParticipantView(),
+            binding: AddParticipantBiding())
       ],
     );
   }

@@ -32,9 +32,10 @@ class ApiClient {
     } on DioError catch (ex) {
       throw ApiException(
           ApiError(detail: ex.error.toString()), ex.response!.statusCode!);
-    } catch (ex) {
-      throw CustomException("Something is wrong with your request!", ex, 500);
     }
+    // catch (ex) {
+    //   throw CustomException("Something is wrong with your request!", ex, 500);
+    // }
   }
 
   Future<ResponseObject> post(

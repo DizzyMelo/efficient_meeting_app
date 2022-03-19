@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../core/api/clients/user_client.dart';
 import '../../core/api/response/user_reponse_model.dart';
+import '../../core/entities/user_entity.dart';
 import '../login/binding.dart';
 import '../login/view.dart';
 

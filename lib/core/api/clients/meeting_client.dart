@@ -1,7 +1,7 @@
 import 'package:efficient_meeting_app/core/api/api_client.dart';
 import 'package:efficient_meeting_app/core/api/response/meeting/detail_meeting_response_model.dart';
-import 'package:efficient_meeting_app/core/api/response/user_reponse_model.dart';
 
+import '../../entities/user_entity.dart';
 import '../response/meeting/add_meeting_response_model.dart';
 import '../response/meeting/meetings_response_model.dart';
 import '../response/response_object.dart';
