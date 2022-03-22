@@ -1,4 +1,7 @@
+import 'package:efficient_meeting_app/modules/participants/binding.dart';
+import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/components/circular_button.dart';
 import '../../../../core/theme/fonts.dart';
@@ -29,7 +32,9 @@ class ParticipantsListComponents extends StatelessWidget {
                     style: CustomTextStyles.textMedium,
                   ),
                   CircularButtonComponent(
-                      function: () => print('add topic'), icon: Icons.add)
+                      function: () => Get.to(AddParticipantView(),
+                          binding: AddParticipantBiding()),
+                      icon: Icons.add)
                 ],
               ),
               const Divider(),

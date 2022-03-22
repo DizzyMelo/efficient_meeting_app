@@ -21,8 +21,31 @@ class AddParticipantController extends GetxController {
       if (response.users!.isNotEmpty) {
         users = response.users;
       } else {
+        users = [];
         GeneralUtils.showMessage(message: 'No user found with this email');
       }
+    }
+  }
+
+  Future<List<User>> getUsersByText({required String email}) async {
+    print(email);
+    if (email.isEmpty) return [];
+    loading.value = true;
+    GetUserByEmailResponse response =
+        await userClient.getUserByEmail(email) as GetUserByEmailResponse;
+    loading.value = false;
+
+    print(response.users!.length);
+
+    if (response.status == 'success') {
+      if (response.users!.isNotEmpty) {
+        return response.users!;
+      } else {
+        return [];
+        // GeneralUtils.showMessage(message: 'No user found with this email');
+      }
+    } else {
+      return [];
     }
   }
 }
