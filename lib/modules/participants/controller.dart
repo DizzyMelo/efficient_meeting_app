@@ -1,4 +1,6 @@
+import 'package:efficient_meeting_app/core/api/clients/meeting_client.dart';
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
+import 'package:efficient_meeting_app/core/api/response/meeting/add_participant_to_meeting_response.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,8 @@ class AddParticipantController extends GetxController {
   List<User>? users;
 
   final userClient = UserClient();
+  final meetingClient = MeetingClient();
+
   getUserByEmail({required String email}) async {
     loading.value = true;
     GetUserByEmailResponse response =
@@ -27,10 +31,17 @@ class AddParticipantController extends GetxController {
     }
   }
 
-  Future addParticipant() async {
+  Future addParticipantToMeeting(meetingId, participantId) async {
     loadingParticipant.value = true;
-    await Future.delayed(const Duration(seconds: 1));
+    AddParticipantToMeetingResponse response =
+        await meetingClient.addParticipantToMeeting(
+            meetingId: meetingId,
+            participantId: participantId) as AddParticipantToMeetingResponse;
     loadingParticipant.value = false;
+
+    if (response.status == 'success') {
+      GeneralUtils.showMessage(message: response.message!);
+    }
   }
 
   Future<List<User>> getUsersByText({required String email}) async {

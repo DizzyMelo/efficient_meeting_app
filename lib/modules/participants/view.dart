@@ -9,7 +9,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
 class AddParticipantView extends GetView<AddParticipantController> {
-  AddParticipantView({Key? key}) : super(key: key);
+  final String meetingId;
+  AddParticipantView({Key? key, required this.meetingId}) : super(key: key);
   final userTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -96,7 +97,8 @@ class AddParticipantView extends GetView<AddParticipantController> {
                       loading: controller.loadingParticipant.value,
                       width: 250,
                       title: 'Add ${participant.firstname} to Meeting',
-                      function: () => controller.addParticipant(),
+                      function: () => controller.addParticipantToMeeting(
+                          '', participant.id),
                     ),
                   )
                 ],

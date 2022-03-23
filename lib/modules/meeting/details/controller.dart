@@ -16,7 +16,6 @@ class DetailMeetingController extends GetxController {
     try {
       meetingResponseModel.value =
           await meetingClient.getOne(meetingId) as DetailMeetingResponseModel;
-      print(meetingResponseModel.value.status);
     } catch (e) {
       GeneralUtils.showMessage(
           message: 'Something went wrong when trying to add meeting!');
@@ -28,7 +27,7 @@ class DetailMeetingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    getMeeting(Get.arguments['meetingId']);
+    meetingId = Get.arguments['meetingId'];
+    getMeeting(meetingId);
   }
 }

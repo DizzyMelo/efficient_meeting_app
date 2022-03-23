@@ -7,8 +7,10 @@ import '../../../../core/components/circular_button.dart';
 import '../../../../core/theme/fonts.dart';
 
 class ParticipantsListComponents extends StatelessWidget {
+  final String meetingId;
   final List<dynamic> participants;
-  const ParticipantsListComponents({Key? key, required this.participants})
+  const ParticipantsListComponents(
+      {Key? key, required this.participants, required this.meetingId})
       : super(key: key);
 
   @override
@@ -32,7 +34,8 @@ class ParticipantsListComponents extends StatelessWidget {
                     style: CustomTextStyles.textMedium,
                   ),
                   CircularButtonComponent(
-                      function: () => Get.to(AddParticipantView(),
+                      function: () => Get.to(
+                          AddParticipantView(meetingId: meetingId),
                           binding: AddParticipantBiding()),
                       icon: Icons.add)
                 ],

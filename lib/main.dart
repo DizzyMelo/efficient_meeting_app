@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         //       .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
         // ),
       ),
-      initialRoute: '/add-participant',
+      initialRoute: '/login',
       getPages: [
         GetPage(
             name: '/login', page: () => LoginView(), binding: LoginBiding()),
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             binding: DetailMeetingBiding()),
         GetPage(
             name: '/add-participant',
-            page: () => AddParticipantView(),
+            page: () => AddParticipantView(meetingId: ''),
             binding: AddParticipantBiding())
       ],
     );

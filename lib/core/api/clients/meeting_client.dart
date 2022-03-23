@@ -1,4 +1,5 @@
 import 'package:efficient_meeting_app/core/api/api_client.dart';
+import 'package:efficient_meeting_app/core/api/response/meeting/add_participant_to_meeting_response.dart';
 import 'package:efficient_meeting_app/core/api/response/meeting/detail_meeting_response_model.dart';
 
 import '../../entities/user_entity.dart';
@@ -42,6 +43,19 @@ class MeetingClient extends ApiClient {
       endpoint: _baseEndpoint,
       body: body,
       serializer: AddMeetingResponseModel.fromJson,
+    );
+
+    return response;
+  }
+
+  Future<ResponseObject> addParticipantToMeeting({
+    required String meetingId,
+    required String participantId,
+  }) async {
+    var response = await super.post(
+      endpoint: "$_baseEndpoint/$meetingId/$participantId",
+      body: {},
+      serializer: AddParticipantToMeetingResponse.fromJson,
     );
 
     return response;
