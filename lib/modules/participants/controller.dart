@@ -1,6 +1,5 @@
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../core/api/response/get_userbyemail_response.dart';
@@ -8,6 +7,7 @@ import '../../core/entities/user_entity.dart';
 
 class AddParticipantController extends GetxController {
   var loading = false.obs;
+  var loadingParticipant = false.obs;
   List<User>? users;
 
   final userClient = UserClient();
@@ -27,15 +27,18 @@ class AddParticipantController extends GetxController {
     }
   }
 
+  Future addParticipant() async {
+    loadingParticipant.value = true;
+    await Future.delayed(const Duration(seconds: 1));
+    loadingParticipant.value = false;
+  }
+
   Future<List<User>> getUsersByText({required String email}) async {
-    print(email);
     if (email.isEmpty) return [];
     loading.value = true;
     GetUserByEmailResponse response =
         await userClient.getUserByEmail(email) as GetUserByEmailResponse;
     loading.value = false;
-
-    print(response.users!.length);
 
     if (response.status == 'success') {
       if (response.users!.isNotEmpty) {

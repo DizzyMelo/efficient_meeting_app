@@ -7,11 +7,16 @@ import '../theme/fonts.dart';
 class CustomButtom extends StatelessWidget {
   final String title;
   final bool loading;
+  final double width;
   final Function()? function;
 
-  const CustomButtom(
-      {Key? key, required this.title, this.function, this.loading = false})
-      : super(key: key);
+  const CustomButtom({
+    Key? key,
+    required this.title,
+    this.function,
+    this.loading = false,
+    this.width = 200,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class CustomButtom extends StatelessWidget {
           // margin: const EdgeInsets.all(10),
           duration: const Duration(milliseconds: 300),
           height: 50,
-          width: loading ? 50 : 200,
+          width: loading ? 50 : width,
           decoration: BoxDecoration(
             color: CustomColors.primary,
             borderRadius: BorderRadius.circular(10),

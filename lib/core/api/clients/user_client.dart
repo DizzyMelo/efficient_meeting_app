@@ -41,10 +41,9 @@ class UserClient extends ApiClient {
   }
 
   Future getUserByEmail(String email) async {
-    Map<String, String> params = {"email": email};
-    var response = await super.get(
-        endpoint: _baseEndpoint,
-        queryParams: params,
+    var response = await super.post(
+        endpoint: "$_baseEndpoint/search/$email",
+        body: {},
         serializer: GetUserByEmailResponse.fromJson);
 
     return response;

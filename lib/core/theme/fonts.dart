@@ -26,8 +26,12 @@ class CustomTextStyles {
 
   static final TextStyle textMedium = TextStyle(
       color: CustomColors.dark, fontSize: 16, fontFamily: Fonts.regular);
+
   static final TextStyle textMediumBold =
       TextStyle(color: CustomColors.dark, fontSize: 16, fontFamily: Fonts.bold);
+
+  static final TextStyle textLargeRegular = TextStyle(
+      color: CustomColors.dark, fontSize: 20, fontFamily: Fonts.regular);
 
   static final TextStyle textTitleRegular = TextStyle(
       color: CustomColors.dark, fontSize: 20, fontFamily: Fonts.regular);

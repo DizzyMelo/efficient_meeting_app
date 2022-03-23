@@ -1,7 +1,6 @@
 import 'package:efficient_meeting_app/core/components/loading_component.dart';
 import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/core/theme/fonts.dart';
-import 'package:efficient_meeting_app/core/utils/general_utils.dart';
 import 'package:efficient_meeting_app/modules/meeting/details/components/topics_list_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
