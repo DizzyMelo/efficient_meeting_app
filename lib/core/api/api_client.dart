@@ -32,10 +32,9 @@ class ApiClient {
     } on DioError catch (ex) {
       throw ApiException(
           ApiError(detail: ex.error.toString()), ex.response!.statusCode!);
+    } catch (ex) {
+      throw CustomException("Something is wrong with your request!", ex, 500);
     }
-    // catch (ex) {
-    //   throw CustomException("Something is wrong with your request!", ex, 500);
-    // }
   }
 
   Future<ResponseObject> post(
@@ -63,13 +62,15 @@ class ApiClient {
     } on ApiException {
       // If the exception caught is an ApiException, then it isn't actually unexpected. We just throw it again
       rethrow;
-    } on DioError catch (ex) {
-      handleError(ex.response!);
-      throw CustomException("Something is wrong with your request", ex,
-          ex.response?.statusCode ?? -1);
-    } catch (ex) {
-      throw CustomException("Something is wrong with your request", ex, 500);
     }
+
+    // on DioError catch (ex) {
+    //   handleError(ex.response!);
+    //   throw CustomException("Something is wrong with your request", ex,
+    //       ex.response?.statusCode ?? -1);
+    // } catch (ex) {
+    //   throw CustomException("Something is wrong with your request", ex, 500);
+    // }
   }
 
   ApiResponse handleResponse(Response response) {

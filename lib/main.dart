@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             binding: DetailMeetingBiding()),
         GetPage(
             name: '/add-participant',
-            page: () => AddParticipantView(meetingId: ''),
+            page: () => AddParticipantView(),
             binding: AddParticipantBiding())
       ],
     );

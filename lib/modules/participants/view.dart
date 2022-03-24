@@ -9,16 +9,18 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
 class AddParticipantView extends GetView<AddParticipantController> {
-  final String meetingId;
-  AddParticipantView({Key? key, required this.meetingId}) : super(key: key);
+  final String? meetingId;
+  AddParticipantView({Key? key, this.meetingId = ''}) : super(key: key);
   final userTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    print('ID DO MMEETINF');
+    print(meetingId);
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(title: 'Add participant'),
+        appBar: const CustomAppBar(title: 'Add Participant'),
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           width: double.infinity,
@@ -60,11 +62,7 @@ class AddParticipantView extends GetView<AddParticipantController> {
                         subtitle: Text(u.email),
                       );
                     },
-                    onSuggestionSelected: (suggestion) {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) =>
-                      // ProductPage(product: suggestion)));
-                    },
+                    onSuggestionSelected: (suggestion) {},
                   ),
                 ),
               ],
@@ -98,7 +96,7 @@ class AddParticipantView extends GetView<AddParticipantController> {
                       width: 250,
                       title: 'Add ${participant.firstname} to Meeting',
                       function: () => controller.addParticipantToMeeting(
-                          '', participant.id),
+                          meetingId!, participant.id),
                     ),
                   )
                 ],

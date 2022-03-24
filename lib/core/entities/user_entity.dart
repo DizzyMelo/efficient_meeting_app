@@ -8,9 +8,9 @@ class User {
     required this.email,
     required this.photo,
     required this.phone,
-    required this.password,
+    // required this.password,
     required this.status,
-    required this.v,
+    // required this.v,
   });
 
   bool termsAccepted;
@@ -21,9 +21,9 @@ class User {
   String email;
   String photo;
   String phone;
-  String? password;
+  // String? password;
   String status;
-  int? v;
+  // int? v;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         termsAccepted: json["termsAccepted"],
@@ -34,9 +34,9 @@ class User {
         email: json["email"],
         photo: json["photo"],
         phone: json["phone"],
-        password: json["password"],
+        // password: json["password"],
         status: json["status"],
-        v: json["__v"],
+        // v: json["__v"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,9 +48,9 @@ class User {
         "email": email,
         "photo": photo,
         "phone": phone,
-        "password": password,
+        // "password": password,
         "status": status,
-        "__v": v,
+        // "__v": v,
       };
 
   static User? user;

@@ -31,7 +31,7 @@ class AddParticipantController extends GetxController {
     }
   }
 
-  Future addParticipantToMeeting(meetingId, participantId) async {
+  Future addParticipantToMeeting(String meetingId, String participantId) async {
     loadingParticipant.value = true;
     AddParticipantToMeetingResponse response =
         await meetingClient.addParticipantToMeeting(
@@ -56,7 +56,6 @@ class AddParticipantController extends GetxController {
         return response.users!;
       } else {
         return [];
-        // GeneralUtils.showMessage(message: 'No user found with this email');
       }
     } else {
       return [];

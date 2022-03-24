@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:efficient_meeting_app/core/api/response/response_object.dart';
+import 'package:efficient_meeting_app/core/entities/user_entity.dart';
 
 DetailMeetingResponseModel detailMeetingResponseModelFromJson(String str) =>
     DetailMeetingResponseModel.fromJson(json.decode(str));
@@ -54,7 +55,7 @@ class Data {
   Host? host;
   int? duration;
   List<Topic>? topics;
-  List<dynamic>? participants;
+  List<User>? participants;
   String? status;
   int? v;
 
@@ -66,7 +67,8 @@ class Data {
         host: Host.fromJson(json["host"]),
         duration: json["duration"],
         topics: List<Topic>.from(json["topics"].map((x) => Topic.fromJson(x))),
-        participants: List<dynamic>.from(json["participants"].map((x) => x)),
+        participants:
+            List<User>.from(json["participants"].map((x) => User.fromJson(x))),
         status: json["status"],
         v: json["__v"],
       );

@@ -7,7 +7,7 @@ class DetailMeetingController extends GetxController {
   var loading = false.obs;
   var counter = 0.obs;
   var meetingResponseModel = DetailMeetingResponseModel().obs;
-  late String meetingId;
+  var meetingId = ''.obs;
 
   final meetingClient = MeetingClient();
 
@@ -27,7 +27,7 @@ class DetailMeetingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    meetingId = Get.arguments['meetingId'];
-    getMeeting(meetingId);
+    meetingId.value = Get.arguments['meetingId'];
+    getMeeting(meetingId.value);
   }
 }

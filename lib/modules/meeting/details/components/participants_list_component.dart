@@ -1,3 +1,5 @@
+import 'package:efficient_meeting_app/core/entities/user_entity.dart';
+import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/participants/binding.dart';
 import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ import '../../../../core/theme/fonts.dart';
 
 class ParticipantsListComponents extends StatelessWidget {
   final String meetingId;
-  final List<dynamic> participants;
+  final List<User> participants;
   const ParticipantsListComponents(
       {Key? key, required this.participants, required this.meetingId})
       : super(key: key);
@@ -45,11 +47,33 @@ class ParticipantsListComponents extends StatelessWidget {
                   ? const Center(
                       child: Text('No participant added yet'),
                     )
-                  : Column(
-                      children: participants
-                          .map((e) => const Text('Participant Name'))
-                          .toList(),
-                    )
+                  : SizedBox(
+                      height: 80,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: participants
+                            .map(
+                              (participant) => Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: CustomColors.accent1,
+                                    ),
+                                    Text(
+                                      participant.firstname,
+                                      style: CustomTextStyles.textSmall,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
             ],
           ),
         ),
