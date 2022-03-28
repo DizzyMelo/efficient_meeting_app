@@ -1,10 +1,12 @@
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
 import 'package:efficient_meeting_app/core/api/response/user_reponse_model.dart';
+import 'package:efficient_meeting_app/core/utils/general_utils.dart';
 import 'package:efficient_meeting_app/modules/home/binding.dart';
 import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:get/get.dart';
 
 import '../../core/entities/user_entity.dart';
+import '../../core/exceptions/unexpected_exception.dart';
 
 class LoginController extends GetxController {
   var loading = false.obs;
@@ -13,14 +15,18 @@ class LoginController extends GetxController {
   final userClient = UserClient();
   void login({required String login, required String password}) async {
     loading.value = true;
-    UserResponseModel response = await userClient.login(
-        login: login, password: password) as UserResponseModel;
+    try {
+      UserResponseModel response = await userClient.login(
+          login: login, password: password) as UserResponseModel;
 
-    loading.value = false;
-
-    if (response.status == 'success') {
-      User.user = response.user;
-      Get.to(HomeView(), binding: HomeBiding());
+      if (response.status == 'success') {
+        User.user = response.user;
+        Get.to(HomeView(), binding: HomeBiding());
+      }
+    } on CustomException catch (ex) {
+      GeneralUtils.showMessage(message: ex.detail);
+    } finally {
+      loading.value = false;
     }
   }
 

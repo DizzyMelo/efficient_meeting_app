@@ -1,7 +1,10 @@
 import 'package:efficient_meeting_app/core/api/clients/meeting_client.dart';
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
 import 'package:efficient_meeting_app/core/api/response/meeting/add_participant_to_meeting_response.dart';
+import 'package:efficient_meeting_app/core/enums/default_colors.dart';
+import 'package:efficient_meeting_app/core/exceptions/unexpected_exception.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../core/api/response/get_userbyemail_response.dart';
@@ -31,16 +34,29 @@ class AddParticipantController extends GetxController {
     }
   }
 
-  Future addParticipantToMeeting(String meetingId, String participantId) async {
+  Future addParticipantToMeeting(
+      BuildContext context, String meetingId, String participantId) async {
     loadingParticipant.value = true;
-    AddParticipantToMeetingResponse response =
-        await meetingClient.addParticipantToMeeting(
-            meetingId: meetingId,
-            participantId: participantId) as AddParticipantToMeetingResponse;
-    loadingParticipant.value = false;
 
-    if (response.status == 'success') {
-      GeneralUtils.showMessage(message: response.message!);
+    try {
+      AddParticipantToMeetingResponse response =
+          await meetingClient.addParticipantToMeeting(
+              meetingId: meetingId,
+              participantId: participantId) as AddParticipantToMeetingResponse;
+      loadingParticipant.value = false;
+
+      if (response.status == 'success') {
+        Navigator.pop(context);
+        GeneralUtils.showMessage(
+          message: response.message!,
+          color: DefaultColor.success,
+        );
+      }
+    } on CustomException catch (e) {
+      Navigator.pop(context);
+      GeneralUtils.showMessage(message: e.detail);
+    } finally {
+      loading.value = false;
     }
   }
 

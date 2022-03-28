@@ -52,12 +52,16 @@ class MeetingClient extends ApiClient {
     required String meetingId,
     required String participantId,
   }) async {
-    var response = await super.post(
-      endpoint: "$_baseEndpoint/add-participant/$meetingId/$participantId",
-      body: {},
-      serializer: AddParticipantToMeetingResponse.fromJson,
-    );
+    try {
+      var response = await super.post(
+        endpoint: "$_baseEndpoint/add-participant/$meetingId/$participantId",
+        body: {},
+        serializer: AddParticipantToMeetingResponse.fromJson,
+      );
 
-    return response;
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

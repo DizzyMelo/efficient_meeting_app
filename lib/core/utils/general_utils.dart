@@ -1,3 +1,5 @@
+import 'package:efficient_meeting_app/core/enums/default_colors.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -17,8 +19,19 @@ class GeneralUtils {
     return null;
   }
 
-  static showMessage({required String message}) {
-    Get.snackbar('', message);
+  static showMessage({
+    required String message,
+    DefaultColor color = DefaultColor.error,
+  }) {
+    String title = color == DefaultColor.success ? 'Yeah!' : 'Attention!';
+
+    Get.snackbar(
+      title,
+      message,
+      backgroundColor: selectColor(color),
+      colorText: Colors.white,
+      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+    );
     // showFlash(
     //   context: context,
     //   duration: const Duration(seconds: 2),
@@ -36,5 +49,20 @@ class GeneralUtils {
     //     );
     //   },
     // );
+  }
+
+  static Color selectColor(DefaultColor color) {
+    switch (color) {
+      case DefaultColor.success:
+        return Colors.green;
+      case DefaultColor.error:
+        return Colors.red;
+      case DefaultColor.info:
+        return Colors.blue;
+      case DefaultColor.warning:
+        return Colors.orange;
+      default:
+        return Colors.blue;
+    }
   }
 }

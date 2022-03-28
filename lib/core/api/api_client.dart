@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:efficient_meeting_app/core/api/response/error/default_api_error_response.dart';
 import 'package:efficient_meeting_app/core/api/response/response_object.dart';
 import 'package:efficient_meeting_app/core/exceptions/api_exception.dart';
 import 'package:efficient_meeting_app/core/exceptions/unexpected_exception.dart';
@@ -64,8 +65,9 @@ class ApiClient {
       rethrow;
     } on DioError catch (ex) {
       handleError(ex.response!);
-      throw CustomException("Something is wrong with your request", ex,
-          ex.response?.statusCode ?? -1);
+      DefaultApiErrorResponse error =
+          DefaultApiErrorResponse.fromJson(ex.response!.data);
+      throw CustomException(error.message!, ex, ex.response?.statusCode ?? -1);
     } catch (ex) {
       throw CustomException("Something is wrong with your request", ex, 500);
     }

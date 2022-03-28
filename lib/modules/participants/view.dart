@@ -16,8 +16,6 @@ class AddParticipantView extends GetView<AddParticipantController> {
 
   @override
   Widget build(BuildContext context) {
-    print('ID DO MMEETINF');
-    print(meetingId);
     return SafeArea(
       child: Scaffold(
         appBar: const CustomAppBar(title: 'Add Participant'),
@@ -96,7 +94,10 @@ class AddParticipantView extends GetView<AddParticipantController> {
                       width: 250,
                       title: 'Add ${participant.firstname} to Meeting',
                       function: () => controller.addParticipantToMeeting(
-                          meetingId!, participant.id),
+                        context,
+                        meetingId!,
+                        participant.id,
+                      ),
                     ),
                   )
                 ],

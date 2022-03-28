@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/api/response/meeting/meetings_response_model.dart';
-import '../../../../core/components/circular_button_placeholder.dart';
 import '../../../meeting/details/binding.dart';
 import '../../../meeting/details/detail_meeting_view.dart';
 
@@ -60,6 +59,30 @@ class MeetingRowComponent extends StatelessWidget {
                         style: CustomTextStyles.textSmall,
                       ),
                       trailing: const Icon(Icons.arrow_upward_outlined),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Date',
+                        style: CustomTextStyles.textMediumBold,
+                      ),
+                      subtitle: Text(GeneralUtils.formatDate(meeting.date),
+                          style: CustomTextStyles.textSmall),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Participants',
+                        style: CustomTextStyles.textMediumBold,
+                      ),
+                      subtitle: Text('${meeting.participants!.length}',
+                          style: CustomTextStyles.textSmall),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Topics',
+                        style: CustomTextStyles.textMediumBold,
+                      ),
+                      subtitle: Text('${meeting.topics!.length}',
+                          style: CustomTextStyles.textSmall),
                     ),
                     const SizedBox(height: 20),
                     CustomButtom(
