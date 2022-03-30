@@ -8,6 +8,7 @@ class CustomButtom extends StatelessWidget {
   final String title;
   final bool loading;
   final double width;
+  final Color backgroudColor;
   final Function()? function;
 
   const CustomButtom({
@@ -16,6 +17,7 @@ class CustomButtom extends StatelessWidget {
     this.function,
     this.loading = false,
     this.width = 200,
+    this.backgroudColor = const Color.fromRGBO(202, 5, 77, 1),
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class CustomButtom extends StatelessWidget {
           height: 50,
           width: loading ? 50 : width,
           decoration: BoxDecoration(
-            color: CustomColors.primary,
+            color: backgroudColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Center(

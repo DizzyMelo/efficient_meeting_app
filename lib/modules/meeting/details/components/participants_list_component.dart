@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import '../../../../core/components/circular_button.dart';
 import '../../../../core/components/custom_buttom.dart';
 import '../../../../core/theme/fonts.dart';
+import '../../../task/list/binding.dart';
+import '../../../task/list/view.dart';
 
 class ParticipantsListComponents extends StatelessWidget {
   final String meetingId;
@@ -91,7 +93,7 @@ class ParticipantsListComponents extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return SizedBox(
-            height: 320,
+            height: 350,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -109,6 +111,13 @@ class ParticipantsListComponents extends StatelessWidget {
                   ListTile(
                     title: Text(user.phone),
                     subtitle: const Text('Phone Number'),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButtom(
+                    title: 'Assign Task',
+                    backgroudColor: CustomColors.accent1,
+                    function: () =>
+                        Get.to(const TaskView(), binding: TaskBiding()),
                   ),
                   const SizedBox(height: 20),
                   const CustomButtom(title: 'Remove Participant')

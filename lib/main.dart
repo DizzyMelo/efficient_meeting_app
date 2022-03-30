@@ -7,9 +7,11 @@ import 'package:efficient_meeting_app/modules/notifications/view.dart';
 import 'package:efficient_meeting_app/modules/participants/binding.dart';
 import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
+import 'package:efficient_meeting_app/providers/counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import 'core/theme/colors.dart';
 import 'modules/login/binding.dart';
@@ -17,12 +19,17 @@ import 'modules/login/view.dart';
 import 'modules/meeting/details/binding.dart';
 import 'modules/meeting/details/detail_meeting_view.dart';
 import 'modules/signup/view.dart';
-import 'modules/task/binding.dart';
-import 'modules/task/view.dart';
+import 'modules/task/list/binding.dart';
+import 'modules/task/list/view.dart';
 
 void main() async {
   await dotenv.load(fileName: "config.env");
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => Counter()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

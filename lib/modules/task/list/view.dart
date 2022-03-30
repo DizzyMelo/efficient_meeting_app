@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
-import 'components/task_header_component.dart';
+import '../components/task_header_component.dart';
 import 'controller.dart';
 
 class TaskView extends GetView<TaskController> {
