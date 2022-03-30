@@ -1,4 +1,4 @@
-import 'package:efficient_meeting_app/core/components/loading_component.dart';
+import 'package:efficient_meeting_app/core/components/custom_appbar_component.dart';
 import 'package:efficient_meeting_app/core/components/loading_meeting_detail_component.dart';
 import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/core/theme/fonts.dart';
@@ -18,6 +18,9 @@ class DetailMeetingView extends GetView<DetailMeetingController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: CustomColors.accent2,
+        appBar: const CustomAppBar(
+          title: 'Details',
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -30,7 +33,8 @@ class DetailMeetingView extends GetView<DetailMeetingController> {
                             meeting: controller.meetingResponseModel.value,
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
                             child: Column(
                               children: [
                                 Text(

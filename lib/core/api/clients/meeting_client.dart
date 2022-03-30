@@ -38,14 +38,17 @@ class MeetingClient extends ApiClient {
       "duration": int.parse(duration),
       "topics": []
     };
+    try {
+      var response = await super.post(
+        endpoint: _baseEndpoint,
+        body: body,
+        serializer: AddMeetingResponseModel.fromJson,
+      );
 
-    var response = await super.post(
-      endpoint: _baseEndpoint,
-      body: body,
-      serializer: AddMeetingResponseModel.fromJson,
-    );
-
-    return response;
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<ResponseObject> addParticipantToMeeting({

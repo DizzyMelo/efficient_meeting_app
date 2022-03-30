@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:efficient_meeting_app/core/api/response/error/default_api_error_response.dart';
 import 'package:efficient_meeting_app/core/api/response/response_object.dart';
+import 'package:efficient_meeting_app/core/api/response/user_reponse_model.dart';
 import 'package:efficient_meeting_app/core/exceptions/api_exception.dart';
 import 'package:efficient_meeting_app/core/exceptions/unexpected_exception.dart';
 import 'package:efficient_meeting_app/core/utils/config_utils.dart';
@@ -17,14 +18,26 @@ class ApiClient {
     required String endpoint,
     Map<String, String>? queryParams,
     String? preferredUrl,
+    Map<String, dynamic>? headers,
     required ResponseObject Function(Map<String, dynamic>) serializer,
   }) async {
     String url = buildUrl(
         endpoint: endpoint,
         queryParams: queryParams,
         preferredUrl: preferredUrl);
+
+    Map<String, dynamic>? requestHeaders = buildHeaders();
+    if (headers != null) {
+      requestHeaders?.addAll(headers);
+    }
+
     try {
-      final response = await dio.get(url);
+      final response = await dio.get(
+        url,
+        options: Options(
+          headers: requestHeaders,
+        ),
+      );
       ApiResponse apiResponse = handleResponse(response);
 
       return serializer(apiResponse.body);
@@ -46,7 +59,7 @@ class ApiClient {
       String? token,
       String? preferredUrl}) async {
     final String url = buildUrl(endpoint: endpoint, preferredUrl: preferredUrl);
-    Map<String, dynamic>? requestHeaders = buildHeaders(token: token);
+    Map<String, dynamic>? requestHeaders = buildHeaders();
     if (headers != null) {
       requestHeaders?.addAll(headers);
     }
@@ -97,14 +110,15 @@ class ApiClient {
     }
   }
 
-  Map<String, dynamic>? buildHeaders({String? token}) {
+  Map<String, dynamic>? buildHeaders() {
     Map<String, String> headers = {};
 
     headers["Accept"] = "application/json";
     headers["ContentType"] = "application/json";
 
-    if (token != null) {
-      headers["Authorization"] = "Bearer $token";
+    if (UserResponseModel.loginResponse != null) {
+      headers["Authorization"] =
+          "Bearer ${UserResponseModel.loginResponse!.token}";
     }
 
     return headers;

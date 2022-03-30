@@ -1,8 +1,9 @@
-import 'package:efficient_meeting_app/core/api/response/meeting/meetings_response_model.dart';
 import 'package:efficient_meeting_app/modules/home/binding.dart';
 import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:efficient_meeting_app/modules/meeting/add/binding.dart';
 import 'package:efficient_meeting_app/modules/meeting/add/view.dart';
+import 'package:efficient_meeting_app/modules/notifications/binding.dart';
+import 'package:efficient_meeting_app/modules/notifications/view.dart';
 import 'package:efficient_meeting_app/modules/participants/binding.dart';
 import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
@@ -16,6 +17,8 @@ import 'modules/login/view.dart';
 import 'modules/meeting/details/binding.dart';
 import 'modules/meeting/details/detail_meeting_view.dart';
 import 'modules/signup/view.dart';
+import 'modules/task/binding.dart';
+import 'modules/task/view.dart';
 
 void main() async {
   await dotenv.load(fileName: "config.env");
@@ -56,7 +59,15 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/add-participant',
             page: () => AddParticipantView(),
-            binding: AddParticipantBiding())
+            binding: AddParticipantBiding()),
+        GetPage(
+            name: '/notifications',
+            page: () => const NotificationsView(),
+            binding: NotificationBiding()),
+        GetPage(
+            name: '/tasks',
+            page: () => const TaskView(),
+            binding: TaskBiding()),
       ],
     );
   }

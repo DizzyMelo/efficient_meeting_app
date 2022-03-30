@@ -1,4 +1,6 @@
 import 'package:efficient_meeting_app/core/api/clients/meeting_client.dart';
+import 'package:efficient_meeting_app/core/enums/default_colors.dart';
+import 'package:efficient_meeting_app/core/exceptions/unexpected_exception.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -15,17 +17,23 @@ class AddMeetingController extends GetxController {
 
   void add(BuildContext context, title, description, date, duration) async {
     loading.value = true;
-    AddMeetingResponseModel response = await meetingClient.add(
-      title: title,
-      description: description,
-      date: date,
-      duration: duration,
-    ) as AddMeetingResponseModel;
 
-    loading.value = false;
+    try {
+      AddMeetingResponseModel response = await meetingClient.add(
+        title: title,
+        description: description,
+        date: date,
+        duration: duration,
+      ) as AddMeetingResponseModel;
 
-    if (response.status == 'success') {
-      GeneralUtils.showMessage(message: 'Meeting added!');
+      if (response.status == 'success') {
+        GeneralUtils.showMessage(
+            message: 'Meeting added!', color: DefaultColor.success);
+      }
+    } on CustomException catch (e) {
+      GeneralUtils.showMessage(message: e.detail);
+    } finally {
+      loading.value = false;
     }
   }
 

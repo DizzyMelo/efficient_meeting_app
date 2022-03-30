@@ -21,6 +21,7 @@ class LoginController extends GetxController {
 
       if (response.status == 'success') {
         User.user = response.user;
+        UserResponseModel.loginResponse = response;
         Get.to(HomeView(), binding: HomeBiding());
       }
     } on CustomException catch (ex) {

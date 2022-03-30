@@ -65,7 +65,7 @@ class MeetingRowComponent extends StatelessWidget {
                         'Date',
                         style: CustomTextStyles.textMediumBold,
                       ),
-                      subtitle: Text(GeneralUtils.formatDate(meeting.date),
+                      trailing: Text(GeneralUtils.formatDate(meeting.date),
                           style: CustomTextStyles.textSmall),
                     ),
                     ListTile(
@@ -73,7 +73,7 @@ class MeetingRowComponent extends StatelessWidget {
                         'Participants',
                         style: CustomTextStyles.textMediumBold,
                       ),
-                      subtitle: Text('${meeting.participants!.length}',
+                      trailing: Text('${meeting.participants!.length}',
                           style: CustomTextStyles.textSmall),
                     ),
                     ListTile(
@@ -81,7 +81,7 @@ class MeetingRowComponent extends StatelessWidget {
                         'Topics',
                         style: CustomTextStyles.textMediumBold,
                       ),
-                      subtitle: Text('${meeting.topics!.length}',
+                      trailing: Text('${meeting.topics!.length}',
                           style: CustomTextStyles.textSmall),
                     ),
                     const SizedBox(height: 20),

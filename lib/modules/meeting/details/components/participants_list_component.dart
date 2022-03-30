@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/components/circular_button.dart';
+import '../../../../core/components/custom_buttom.dart';
 import '../../../../core/theme/fonts.dart';
 
 class ParticipantsListComponents extends StatelessWidget {
@@ -54,20 +55,24 @@ class ParticipantsListComponents extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         children: participants
                             .map(
-                              (participant) => Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: CustomColors.accent1,
-                                    ),
-                                    Text(
-                                      participant.firstname,
-                                      style: CustomTextStyles.textSmall,
-                                    )
-                                  ],
+                              (participant) => InkWell(
+                                onTap: () => displayUser(context, participant),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: CustomColors.accent1,
+                                      ),
+                                      Text(
+                                        participant.firstname,
+                                        style: CustomTextStyles.textSmall,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             )
@@ -79,5 +84,38 @@ class ParticipantsListComponents extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  displayUser(BuildContext context, User user) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+            height: 320,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    '${user.firstname} ${user.lastname}',
+                    style: CustomTextStyles.textMedium,
+                  ),
+                  const SizedBox(height: 20),
+                  ListTile(
+                    title: Text(user.email),
+                    subtitle: const Text('Email'),
+                  ),
+                  ListTile(
+                    title: Text(user.phone),
+                    subtitle: const Text('Phone Number'),
+                  ),
+                  const SizedBox(height: 20),
+                  const CustomButtom(title: 'Remove Participant')
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

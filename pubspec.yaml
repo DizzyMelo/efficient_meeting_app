@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  badges: ^2.0.2
   cupertino_icons: ^1.0.2
   dio: ^4.0.4
   expandable: ^5.0.1
@@ -38,6 +39,7 @@ dependencies:
   flutter_typeahead: ^3.2.4
   get: ^4.6.1
   intl: ^0.17.0
+  line_icons: ^2.0.1
   shimmer: ^2.0.0
 
 dev_dependencies:
