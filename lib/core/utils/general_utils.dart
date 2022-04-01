@@ -65,4 +65,24 @@ class GeneralUtils {
         return Colors.blue;
     }
   }
+
+  static Future<DateTime?> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      initialDatePickerMode: DatePickerMode.day,
+      firstDate: DateTime(DateTime.now().year),
+      lastDate: DateTime(DateTime.now().add(const Duration(days: 365)).year),
+    );
+    return picked;
+  }
+
+  static Future<TimeOfDay?> selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime:
+          TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
+    );
+    return picked;
+  }
 }

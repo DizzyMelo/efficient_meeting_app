@@ -2,12 +2,16 @@ import 'package:efficient_meeting_app/core/entities/user_entity.dart';
 import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/participants/binding.dart';
 import 'package:efficient_meeting_app/modules/participants/view.dart';
+import 'package:efficient_meeting_app/providers/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/components/circular_button.dart';
 import '../../../../core/components/custom_buttom.dart';
 import '../../../../core/theme/fonts.dart';
+import '../../../task/add/binding.dart';
+import '../../../task/add/view.dart';
 import '../../../task/list/binding.dart';
 import '../../../task/list/view.dart';
 
@@ -68,6 +72,8 @@ class ParticipantsListComponents extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         backgroundColor: CustomColors.accent1,
+                                        backgroundImage: const AssetImage(
+                                            'assets/img/alien.png'),
                                       ),
                                       Text(
                                         participant.firstname,
@@ -114,11 +120,12 @@ class ParticipantsListComponents extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   CustomButtom(
-                    title: 'Assign Task',
-                    backgroudColor: CustomColors.accent1,
-                    function: () =>
-                        Get.to(const TaskView(), binding: TaskBiding()),
-                  ),
+                      title: 'Assign Task',
+                      backgroudColor: CustomColors.accent1,
+                      function: () {
+                        context.read<TaskProvider>().setUserToAddTask(user);
+                        Get.to(AddTaskView(), binding: AddTaskBiding());
+                      }),
                   const SizedBox(height: 20),
                   const CustomButtom(title: 'Remove Participant')
                 ],

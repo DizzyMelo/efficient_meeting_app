@@ -8,12 +8,14 @@ class CustomTextFieldComponent extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final int maxLines;
 
   const CustomTextFieldComponent({
     Key? key,
     required this.label,
     required this.controller,
     this.validator,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class CustomTextFieldComponent extends StatelessWidget {
       children: [
         TextFormField(
           controller: controller,
+          maxLines: maxLines,
           validator: validator ?? GeneralUtils.defaultTextfieldValidator,
           style: CustomTextStyles.textMedium,
           decoration: InputDecoration(

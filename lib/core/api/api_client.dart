@@ -74,7 +74,6 @@ class ApiClient {
 
       return serializer(apiResponse.body);
     } on ApiException {
-      // If the exception caught is an ApiException, then it isn't actually unexpected. We just throw it again
       rethrow;
     } on DioError catch (ex) {
       handleError(ex.response!);

@@ -8,6 +8,7 @@ import 'package:efficient_meeting_app/modules/participants/binding.dart';
 import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:efficient_meeting_app/providers/counter_provider.dart';
+import 'package:efficient_meeting_app/providers/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,8 @@ import 'modules/login/view.dart';
 import 'modules/meeting/details/binding.dart';
 import 'modules/meeting/details/detail_meeting_view.dart';
 import 'modules/signup/view.dart';
+import 'modules/task/add/binding.dart';
+import 'modules/task/add/view.dart';
 import 'modules/task/list/binding.dart';
 import 'modules/task/list/view.dart';
 
@@ -27,6 +30,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => Counter()),
+      ChangeNotifierProvider(create: (_) => TaskProvider()),
     ],
     child: const MyApp(),
   ));
@@ -75,6 +79,10 @@ class MyApp extends StatelessWidget {
             name: '/tasks',
             page: () => const TaskView(),
             binding: TaskBiding()),
+        GetPage(
+            name: '/add-task',
+            page: () => AddTaskView(),
+            binding: AddTaskBiding()),
       ],
     );
   }
