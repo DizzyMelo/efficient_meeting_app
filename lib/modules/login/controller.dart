@@ -22,7 +22,7 @@ class LoginController extends GetxController {
       if (response.status == 'success') {
         User.user = response.user;
         UserResponseModel.loginResponse = response;
-        Get.to(HomeView(), binding: HomeBiding());
+        Get.offAndToNamed('/home');
       }
     } on CustomException catch (ex) {
       GeneralUtils.showMessage(message: ex.detail);

@@ -11,10 +11,12 @@ import 'package:line_icons/line_icons.dart';
 import '../../core/components/custom_appbar_component.dart';
 import '../meeting/add/binding.dart';
 import '../meeting/add/view.dart';
+import 'components/home_toggle_button_component.dart';
+import 'components/tasks/task_list_component.dart';
 import 'controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class HomeView extends GetView<HomeController> {
       child: Scaffold(
         backgroundColor: CustomColors.accent2,
         appBar: CustomAppBar(
-          title: 'Details',
+          title: '',
           actions: [
             Badge(
               position: BadgePosition.topEnd(top: 2, end: 3),
@@ -31,7 +33,7 @@ class HomeView extends GetView<HomeController> {
                 style: TextStyle(color: Colors.white),
               ),
               child: IconButton(
-                  onPressed: () => Get.to(NotificationsView(),
+                  onPressed: () => Get.to(const NotificationsView(),
                       binding: NotificationBiding()),
                   icon: const Icon(LineIcons.bell)),
             )
@@ -42,10 +44,47 @@ class HomeView extends GetView<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const HomeHeaderComponent(),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  // color: Colors.grey[200],
+                ),
+                height: 40,
+                child: Obx(
+                  () => Row(
+                    children: [
+                      HomeToggleButtonComponent(
+                        title: 'Meeings',
+                        isSelected: controller.showMeeting.value,
+                        isLeft: true,
+                        onPressed: () => controller.toggleShowMeetingTask(true),
+                      ),
+                      HomeToggleButtonComponent(
+                        title: 'Tasks',
+                        isSelected: !controller.showMeeting.value,
+                        isLeft: false,
+                        onPressed: () =>
+                            controller.toggleShowMeetingTask(false),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Obx(
-                () => MeetingListComponent(
-                    meetings: controller.meetingsResponseModel.value.meetings!,
-                    loading: controller.loading.value),
+                () => AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  child: controller.showMeeting.value
+                      ? MeetingListComponent(
+                          meetings: controller.meetings,
+                          loading: controller.loading.value,
+                        )
+                      : TaskListComponent(
+                          loading: controller.loadingTasks.value,
+                          tasks: controller.tasks,
+                        ),
+                ),
               ),
             ],
           ),

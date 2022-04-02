@@ -60,6 +60,8 @@ class AddTaskController extends GetxController {
       "createdBy": User.user!.id
     };
 
+    print(body);
+
     loading.value = true;
     try {
       AddTaskResponse response =

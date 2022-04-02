@@ -24,6 +24,9 @@ class CustomTextStyles {
   static final TextStyle textSmall = TextStyle(
       color: CustomColors.dark, fontSize: 14, fontFamily: Fonts.regular);
 
+  static const TextStyle textSmallLight =
+      TextStyle(color: Colors.white, fontSize: 14, fontFamily: Fonts.regular);
+
   static final TextStyle textMedium = TextStyle(
       color: CustomColors.dark, fontSize: 16, fontFamily: Fonts.regular);
 

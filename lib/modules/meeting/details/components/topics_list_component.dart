@@ -1,6 +1,7 @@
 import 'package:efficient_meeting_app/core/components/circular_button.dart';
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../../../core/api/response/meeting/detail_meeting_response_model.dart';
 import '../../../../core/theme/fonts.dart';
@@ -31,7 +32,7 @@ class TopicsListComponents extends StatelessWidget {
                     style: CustomTextStyles.textMedium,
                   ),
                   CircularButtonComponent(
-                      function: () => print('add topic'), icon: Icons.add)
+                      function: () => print('add topic'), icon: LineIcons.plus)
                 ],
               ),
               const Divider(),
@@ -47,10 +48,10 @@ class TopicsListComponents extends StatelessWidget {
                               title: Text(topic.name!),
                               trailing: topic.completed!
                                   ? const Icon(
-                                      Icons.check,
+                                      LineIcons.checkCircle,
                                       color: Colors.green,
                                     )
-                                  : const Icon(Icons.hourglass_bottom),
+                                  : const Icon(LineIcons.hourglass),
                             ),
                           )
                           .toList(),

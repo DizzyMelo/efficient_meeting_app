@@ -26,17 +26,18 @@ class MeetingRowComponent extends StatelessWidget {
             // padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5)),
             child: Expandable(
               collapsed: ExpandableButton(
                 child: ListTile(
                     title: Text(
                       meeting.title!,
-                      style: CustomTextStyles.textMediumBold,
+                      // style: CustomTextStyles.textMediumBold,
                     ),
                     subtitle: Text(
                       GeneralUtils.formatDate(meeting.date),
-                      style: CustomTextStyles.textSmall,
+                      // style: CustomTextStyles.textSmall,
                     ),
                     trailing: const Icon(Icons.arrow_downward)
                     // trailing: CircularButtonComponent(

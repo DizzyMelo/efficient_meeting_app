@@ -14,26 +14,28 @@ class MeetingListComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return const LoadingCardsComponent();
+    }
+    if (meetings.isEmpty) {
+      return Center(
+        child: Text(
+          'No upcoming meetings',
+          style: CustomTextStyles.textMedium,
+        ),
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Text(
-            "Upcoming Meetings",
-            style: CustomTextStyles.textTitleBold,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: meetings
+                .map((meeting) => MeetingRowComponent(meeting: meeting))
+                .toList(),
           ),
-        ),
-        loading
-            ? const LoadingCardsComponent()
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: meetings
-                      .map((meeting) => MeetingRowComponent(meeting: meeting))
-                      .toList(),
-                ),
-              )
+        )
       ],
     );
   }

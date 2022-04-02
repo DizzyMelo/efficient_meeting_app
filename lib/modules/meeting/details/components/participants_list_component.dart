@@ -5,6 +5,7 @@ import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:efficient_meeting_app/providers/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/components/circular_button.dart';
@@ -12,8 +13,6 @@ import '../../../../core/components/custom_buttom.dart';
 import '../../../../core/theme/fonts.dart';
 import '../../../task/add/binding.dart';
 import '../../../task/add/view.dart';
-import '../../../task/list/binding.dart';
-import '../../../task/list/view.dart';
 
 class ParticipantsListComponents extends StatelessWidget {
   final String meetingId;
@@ -46,7 +45,7 @@ class ParticipantsListComponents extends StatelessWidget {
                       function: () => Get.to(
                           AddParticipantView(meetingId: meetingId),
                           binding: AddParticipantBiding()),
-                      icon: Icons.add)
+                      icon: LineIcons.plus)
                 ],
               ),
               const Divider(),
@@ -123,6 +122,7 @@ class ParticipantsListComponents extends StatelessWidget {
                       title: 'Assign Task',
                       backgroudColor: CustomColors.accent1,
                       function: () {
+                        Navigator.pop(context);
                         context.read<TaskProvider>().setUserToAddTask(user);
                         Get.to(AddTaskView(), binding: AddTaskBiding());
                       }),
