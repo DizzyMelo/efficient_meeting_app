@@ -1,9 +1,12 @@
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:efficient_meeting_app/core/components/custom_textfield_component.dart';
 import 'package:efficient_meeting_app/core/components/logo_component.dart';
+import 'package:efficient_meeting_app/providers/meeting_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/components/datetime_button_component.dart';
 import 'controller.dart';
 
 class AddMeetingView extends GetView<AddMeetingController> {
@@ -44,15 +47,29 @@ class AddMeetingView extends GetView<AddMeetingController> {
                         validator: controller.defaultTextfieldValidator,
                       ),
                       CustomTextFieldComponent(
-                        label: 'Date',
-                        controller: _dateController,
-                        validator: controller.defaultTextfieldValidator,
-                      ),
-                      CustomTextFieldComponent(
                         label: 'Duration (min)',
                         controller: _durationController,
+                        inputType: TextInputType.number,
                         validator: controller.defaultTextfieldValidator,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DateTimeButtonComponent(
+                              onPressed: () =>
+                                  controller.requestDateInput(context),
+                              title: context
+                                  .watch<MeetingProvider>()
+                                  .dateToMeetingStr),
+                          DateTimeButtonComponent(
+                              onPressed: () =>
+                                  controller.requestTimeInput(context),
+                              title: context
+                                  .watch<MeetingProvider>()
+                                  .timeToMeetingStr)
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                       Obx(
                         () => CustomButtom(
                           title: 'Add Meeting',
@@ -62,7 +79,6 @@ class AddMeetingView extends GetView<AddMeetingController> {
                                 context,
                                 _titleController.text,
                                 _descriptionController.text,
-                                _dateController.text,
                                 _durationController.text,
                               );
                             }

@@ -1,6 +1,7 @@
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:efficient_meeting_app/core/components/custom_textfield_component.dart';
 import 'package:efficient_meeting_app/core/components/logo_component.dart';
+import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/signup/binding.dart';
 import 'package:efficient_meeting_app/modules/signup/view.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: CustomColors.accent1,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -36,13 +38,20 @@ class LoginView extends GetView<LoginController> {
                     children: [
                       CustomTextFieldComponent(
                         label: 'Email',
+                        inputType: TextInputType.emailAddress,
+                        capitalization: TextCapitalization.none,
                         controller: _loginController,
                         validator: controller.validateEmail,
                       ),
-                      CustomTextFieldComponent(
-                        label: 'Password',
-                        controller: _passwordController,
-                        validator: controller.validatePassword,
+                      Obx(
+                        () => CustomTextFieldComponent(
+                          isObscure: controller.isObscureText.value,
+                          toggleObscureText: controller.toggleObscureText,
+                          label: 'Password',
+                          capitalization: TextCapitalization.none,
+                          controller: _passwordController,
+                          validator: controller.validatePassword,
+                        ),
                       ),
                       Obx(
                         () => CustomButtom(

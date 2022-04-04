@@ -91,8 +91,10 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () =>
-                Get.to(AddMeetingView(), binding: AddMeetingBiding()),
+            onPressed: () async => [
+                  await Get.to(AddMeetingView(), binding: AddMeetingBiding()),
+                  controller.getAllMeetings()
+                ],
             child: const Icon(Icons.add)),
       ),
     );

@@ -1,8 +1,6 @@
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
 import 'package:efficient_meeting_app/core/api/response/user_reponse_model.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
-import 'package:efficient_meeting_app/modules/home/binding.dart';
-import 'package:efficient_meeting_app/modules/home/view.dart';
 import 'package:get/get.dart';
 
 import '../../core/entities/user_entity.dart';
@@ -10,6 +8,7 @@ import '../../core/exceptions/unexpected_exception.dart';
 
 class LoginController extends GetxController {
   var loading = false.obs;
+  var isObscureText = true.obs;
   var counter = 0.obs;
 
   final userClient = UserClient();
@@ -40,4 +39,6 @@ class LoginController extends GetxController {
     if (password == null || password.isEmpty) return "Password is required";
     return null;
   }
+
+  toggleObscureText() => isObscureText.value = !isObscureText.value;
 }

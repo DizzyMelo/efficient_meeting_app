@@ -2,8 +2,11 @@ import 'package:efficient_meeting_app/core/api/clients/meeting_client.dart';
 import 'package:efficient_meeting_app/core/enums/default_colors.dart';
 import 'package:efficient_meeting_app/core/exceptions/unexpected_exception.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
+import 'package:efficient_meeting_app/providers/meeting_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/api/response/meeting/add_meeting_response_model.dart';
 import '../../../core/api/response/meeting/meetings_response_model.dart';
@@ -15,14 +18,33 @@ class AddMeetingController extends GetxController {
 
   final meetingClient = MeetingClient();
 
-  void add(BuildContext context, title, description, date, duration) async {
+  void add(BuildContext context, title, description, duration) async {
+    if (context.read<MeetingProvider>().dateToMeetingStr == "Select Date") {
+      GeneralUtils.showMessage(message: "Please, select a date");
+      return;
+    }
+    if (context.read<MeetingProvider>().timeToMeetingStr == "Select Time") {
+      GeneralUtils.showMessage(message: "Please, select a time");
+      return;
+    }
     loading.value = true;
+
+    DateTime tempDate = context.read<MeetingProvider>().dateToMeeting!;
+    TimeOfDay tempTime = context.read<MeetingProvider>().timeToMeeting!;
+
+    DateTime date = DateTime(
+      tempDate.year,
+      tempDate.month,
+      tempDate.day,
+      tempTime.hour,
+      tempTime.minute,
+    );
 
     try {
       AddMeetingResponseModel response = await meetingClient.add(
         title: title,
         description: description,
-        date: date,
+        date: date.toIso8601String(),
         duration: duration,
       ) as AddMeetingResponseModel;
 
@@ -53,5 +75,21 @@ class AddMeetingController extends GetxController {
   String? defaultTextfieldValidator(String? input) {
     if (input!.isEmpty) return "The field above is required";
     return null;
+  }
+
+  void requestDateInput(BuildContext context) async {
+    DateTime? date = await GeneralUtils.selectDate(context);
+
+    if (date != null) {
+      context.read<MeetingProvider>().setDateToMeeting(date);
+    }
+  }
+
+  void requestTimeInput(BuildContext context) async {
+    TimeOfDay? time = await GeneralUtils.selectTime(context);
+
+    if (time != null) {
+      context.read<MeetingProvider>().setTimeToMeeting(time);
+    }
   }
 }

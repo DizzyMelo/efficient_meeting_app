@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../../core/entities/user_entity.dart';
 import '../../../core/theme/colors.dart';
@@ -18,9 +20,12 @@ class HomeHeaderComponent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CircleAvatar(
-            radius: 50,
-            foregroundImage: AssetImage("assets/img/alien.png"),
+          InkWell(
+            onTap: () => displayUser(context),
+            child: const CircleAvatar(
+              radius: 50,
+              foregroundImage: AssetImage("assets/img/alien.png"),
+            ),
           ),
           const SizedBox(height: 10),
           Text(
@@ -37,5 +42,31 @@ class HomeHeaderComponent extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  displayUser(BuildContext context) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+            height: 60,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    onTap: () => Get.offAndToNamed('login'),
+                    leading: const Icon(LineIcons.alternateLongArrowRight),
+                    title: Text(
+                      'Log out',
+                      style: CustomTextStyles.textMedium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

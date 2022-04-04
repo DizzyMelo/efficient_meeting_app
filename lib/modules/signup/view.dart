@@ -1,6 +1,7 @@
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:efficient_meeting_app/core/components/custom_textfield_component.dart';
 import 'package:efficient_meeting_app/core/components/logo_component.dart';
+import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/signup/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class SignupView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: CustomColors.accent1,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -44,14 +46,17 @@ class SignupView extends GetView<SignupController> {
                       CustomTextFieldComponent(
                         label: 'Email',
                         controller: _emailController,
+                        inputType: TextInputType.emailAddress,
                       ),
                       CustomTextFieldComponent(
                         label: 'Phone',
                         controller: _phoneController,
+                        inputType: TextInputType.number,
                       ),
                       CustomTextFieldComponent(
                         label: 'Password',
                         controller: _passwordController,
+                        capitalization: TextCapitalization.none,
                       ),
                       Obx(
                         () => CustomButtom(
