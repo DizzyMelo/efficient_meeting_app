@@ -1,12 +1,13 @@
-import 'package:efficient_meeting_app/core/components/circular_button.dart';
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:efficient_meeting_app/core/theme/fonts.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
+import 'package:efficient_meeting_app/providers/meeting_provider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../core/api/response/meeting/meetings_response_model.dart';
+import '../../../../core/entities/meeting_entity.dart';
 import '../../../meeting/details/binding.dart';
 import '../../../meeting/details/detail_meeting_view.dart';
 
@@ -23,7 +24,6 @@ class MeetingRowComponent extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            // padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
                 color: Colors.grey[100],
@@ -33,19 +33,11 @@ class MeetingRowComponent extends StatelessWidget {
                 child: ListTile(
                     title: Text(
                       meeting.title!,
-                      // style: CustomTextStyles.textMediumBold,
                     ),
                     subtitle: Text(
                       GeneralUtils.formatDate(meeting.date),
-                      // style: CustomTextStyles.textSmall,
                     ),
-                    trailing: const Icon(Icons.arrow_downward)
-                    // trailing: CircularButtonComponent(
-                    //     function: () => Get.to(const DetailMeetingView(),
-                    //         binding: DetailMeetingBiding(),
-                    //         arguments: {'meetingId': meeting.id!}),
-                    //     icon: Icons.arrow_forward_ios),
-                    ),
+                    trailing: const Icon(Icons.arrow_downward)),
               ),
               expanded: ExpandableButton(
                 child: Column(
@@ -88,9 +80,12 @@ class MeetingRowComponent extends StatelessWidget {
                     const SizedBox(height: 20),
                     CustomButtom(
                       title: 'Details',
-                      function: () => Get.to(const DetailMeetingView(),
-                          binding: DetailMeetingBiding(),
-                          arguments: {'meetingId': meeting.id!}),
+                      function: () {
+                        context.read<MeetingProvider>().setMeeting(meeting);
+                        Get.to(const DetailMeetingView(),
+                            binding: DetailMeetingBiding(),
+                            arguments: {'meetingId': meeting.id!});
+                      },
                     ),
                     const SizedBox(height: 20),
                   ],

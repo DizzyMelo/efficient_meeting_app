@@ -1,6 +1,6 @@
 import 'package:efficient_meeting_app/core/api/clients/meeting_client.dart';
 import 'package:efficient_meeting_app/core/api/clients/user_client.dart';
-import 'package:efficient_meeting_app/core/api/response/meeting/add_participant_to_meeting_response.dart';
+import 'package:efficient_meeting_app/core/api/response/meeting/update_meeting_response.dart';
 import 'package:efficient_meeting_app/core/enums/default_colors.dart';
 import 'package:efficient_meeting_app/core/exceptions/unexpected_exception.dart';
 import 'package:efficient_meeting_app/core/utils/general_utils.dart';
@@ -39,10 +39,10 @@ class AddParticipantController extends GetxController {
     loadingParticipant.value = true;
 
     try {
-      AddParticipantToMeetingResponse response =
+      UpdateMeetingResponse response =
           await meetingClient.addParticipantToMeeting(
               meetingId: meetingId,
-              participantId: participantId) as AddParticipantToMeetingResponse;
+              participantId: participantId) as UpdateMeetingResponse;
       loadingParticipant.value = false;
 
       if (response.status == 'success') {

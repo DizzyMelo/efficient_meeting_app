@@ -15,6 +15,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'core/theme/colors.dart';
+import 'modules/add_topic/binding.dart';
+import 'modules/add_topic/view.dart';
 import 'modules/login/binding.dart';
 import 'modules/login/view.dart';
 import 'modules/meeting/details/binding.dart';
@@ -24,6 +26,7 @@ import 'modules/task/add/binding.dart';
 import 'modules/task/add/view.dart';
 import 'modules/task/list/binding.dart';
 import 'modules/task/list/view.dart';
+import 'providers/meeting_provider.dart';
 
 void main() async {
   await dotenv.load(fileName: "config.env");
@@ -31,6 +34,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => Counter()),
       ChangeNotifierProvider(create: (_) => TaskProvider()),
+      ChangeNotifierProvider(create: (_) => MeetingProvider()),
     ],
     child: const MyApp(),
   ));
@@ -58,7 +62,8 @@ class MyApp extends StatelessWidget {
             name: '/login', page: () => LoginView(), binding: LoginBiding()),
         GetPage(
             name: '/signup', page: () => SignupView(), binding: SignupBiding()),
-        GetPage(name: '/home', page: () => HomeView(), binding: HomeBiding()),
+        GetPage(
+            name: '/home', page: () => const HomeView(), binding: HomeBiding()),
         GetPage(
             name: '/add-meeting',
             page: () => AddMeetingView(),
@@ -83,6 +88,10 @@ class MyApp extends StatelessWidget {
             name: '/add-task',
             page: () => AddTaskView(),
             binding: AddTaskBiding()),
+        GetPage(
+            name: '/add-topic',
+            page: () => AddTopicView(),
+            binding: AddTopicBiding()),
       ],
     );
   }

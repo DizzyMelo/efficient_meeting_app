@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final addParticipantToMeetingResponse = addParticipantToMeetingResponseFromJson(jsonString);
+//     final UpdateMeetingResponse = addParticipantToMeetingResponseFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -8,16 +8,14 @@ import 'package:efficient_meeting_app/core/api/response/response_object.dart';
 
 import '../../../entities/meeting_entity.dart';
 
-AddParticipantToMeetingResponse addParticipantToMeetingResponseFromJson(
-        String str) =>
-    AddParticipantToMeetingResponse.fromJson(json.decode(str));
+UpdateMeetingResponse updateMeetingResponseFromJson(String str) =>
+    UpdateMeetingResponse.fromJson(json.decode(str));
 
-String addParticipantToMeetingResponseToJson(
-        AddParticipantToMeetingResponse data) =>
+String updateMeetingResponseToJson(UpdateMeetingResponse data) =>
     json.encode(data.toJson());
 
-class AddParticipantToMeetingResponse extends ResponseObject {
-  AddParticipantToMeetingResponse({
+class UpdateMeetingResponse extends ResponseObject {
+  UpdateMeetingResponse({
     this.status,
     this.message,
     this.meeting,
@@ -27,8 +25,8 @@ class AddParticipantToMeetingResponse extends ResponseObject {
   String? message;
   Meeting? meeting;
 
-  factory AddParticipantToMeetingResponse.fromJson(Map<String, dynamic> json) =>
-      AddParticipantToMeetingResponse(
+  factory UpdateMeetingResponse.fromJson(Map<String, dynamic> json) =>
+      UpdateMeetingResponse(
         status: json["status"],
         message: json["message"],
         meeting: Meeting.fromJson(json["meeting"]),

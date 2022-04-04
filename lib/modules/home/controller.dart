@@ -5,6 +5,7 @@ import 'package:efficient_meeting_app/core/entities/task_entity.dart';
 import 'package:get/get.dart';
 
 import '../../core/api/response/meeting/meetings_response_model.dart';
+import '../../core/entities/meeting_entity.dart';
 
 class HomeController extends GetxController {
   var loading = false.obs;
