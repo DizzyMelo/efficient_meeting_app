@@ -56,7 +56,7 @@ class HomeView extends GetView<HomeController> {
                   () => Row(
                     children: [
                       HomeToggleButtonComponent(
-                        title: 'Meeings',
+                        title: 'Meetings',
                         isSelected: controller.showMeeting.value,
                         isLeft: true,
                         onPressed: () => controller.toggleShowMeetingTask(true),

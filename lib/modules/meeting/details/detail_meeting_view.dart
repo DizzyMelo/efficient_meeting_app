@@ -57,6 +57,7 @@ class DetailMeetingView extends GetView<DetailMeetingController> {
                                 ),
                               ),
                               ParticipantsListComponents(
+                                controller: controller,
                                 meetingId: controller.meetingId.value,
                                 participants: controller.meetingResponseModel
                                     .value.data!.participants!,

@@ -3,9 +3,11 @@ import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
 import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/add_topic/view.dart';
 import 'package:efficient_meeting_app/modules/meeting/details/controller.dart';
+import 'package:efficient_meeting_app/providers/meeting_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/api/response/meeting/detail_meeting_response_model.dart';
 import '../../../../core/theme/fonts.dart';
@@ -41,8 +43,14 @@ class TopicsListComponents extends StatelessWidget {
                     style: CustomTextStyles.textMedium,
                   ),
                   CircularButtonComponent(
-                      function: () =>
-                          Get.to(AddTopicView(), binding: AddTopicBiding()),
+                      function: () async => [
+                            await Get.to(AddTopicView(),
+                                binding: AddTopicBiding()),
+                            controller.getMeeting(context
+                                .read<MeetingProvider>()
+                                .selectedMeeting!
+                                .id!)
+                          ],
                       icon: LineIcons.plus)
                 ],
               ),
@@ -103,8 +111,14 @@ class TopicsListComponents extends StatelessWidget {
                                 loading: controller.loadingUpdateStatus.value,
                                 title: 'Set Topic Completed',
                                 backgroudColor: CustomColors.accent1,
-                                function: () => controller.updateTopicStatus(
-                                    context, topic.id!, !topic.completed!),
+                                function: () async => [
+                                  await controller.updateTopicStatus(
+                                      context, topic.id!, !topic.completed!),
+                                  controller.getMeeting(context
+                                      .read<MeetingProvider>()
+                                      .selectedMeeting!
+                                      .id!)
+                                ],
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -112,8 +126,14 @@ class TopicsListComponents extends StatelessWidget {
                               () => CustomButtom(
                                 loading: controller.loadingUpdate.value,
                                 title: 'Remove Topic',
-                                function: () => controller
-                                    .removeTopicFromMeeting(context, topic.id!),
+                                function: () async => [
+                                  await controller.removeTopicFromMeeting(
+                                      context, topic.id!),
+                                  controller.getMeeting(context
+                                      .read<MeetingProvider>()
+                                      .selectedMeeting!
+                                      .id!)
+                                ],
                               ),
                             )
                           ],

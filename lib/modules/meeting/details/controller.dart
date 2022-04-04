@@ -53,6 +53,29 @@ class DetailMeetingController extends GetxController {
     }
   }
 
+  removeParticipantFromMeeting(
+      BuildContext context, String participantId) async {
+    loadingUpdate.value = true;
+    String meetingId = context.read<MeetingProvider>().selectedMeeting!.id!;
+    try {
+      UpdateMeetingResponse response =
+          await meetingClient.removeParticipantFromMeeting(
+              meetingId: meetingId,
+              participantId: participantId) as UpdateMeetingResponse;
+      if (response.status == 'success') {
+        Navigator.pop(context);
+        GeneralUtils.showMessage(
+          message: response.message!,
+          color: DefaultColor.success,
+        );
+      }
+    } on CustomException catch (e) {
+      GeneralUtils.showMessage(message: e.detail);
+    } finally {
+      loadingUpdate.value = false;
+    }
+  }
+
   updateTopicStatus(
       BuildContext context, String topicId, bool completed) async {
     loadingUpdateStatus.value = true;

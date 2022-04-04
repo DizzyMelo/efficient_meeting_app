@@ -1,5 +1,6 @@
 import 'package:efficient_meeting_app/core/entities/user_entity.dart';
 import 'package:efficient_meeting_app/core/theme/colors.dart';
+import 'package:efficient_meeting_app/modules/meeting/details/controller.dart';
 import 'package:efficient_meeting_app/modules/participants/binding.dart';
 import 'package:efficient_meeting_app/modules/participants/view.dart';
 import 'package:efficient_meeting_app/providers/task_provider.dart';
@@ -15,10 +16,14 @@ import '../../../task/add/binding.dart';
 import '../../../task/add/view.dart';
 
 class ParticipantsListComponents extends StatelessWidget {
+  final DetailMeetingController controller;
   final String meetingId;
   final List<User> participants;
   const ParticipantsListComponents(
-      {Key? key, required this.participants, required this.meetingId})
+      {Key? key,
+      required this.participants,
+      required this.meetingId,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -42,9 +47,12 @@ class ParticipantsListComponents extends StatelessWidget {
                     style: CustomTextStyles.textMedium,
                   ),
                   CircularButtonComponent(
-                      function: () => Get.to(
-                          AddParticipantView(meetingId: meetingId),
-                          binding: AddParticipantBiding()),
+                      function: () async => [
+                            await Get.to(
+                                AddParticipantView(meetingId: meetingId),
+                                binding: AddParticipantBiding()),
+                            controller.getMeeting(meetingId)
+                          ],
                       icon: LineIcons.plus)
                 ],
               ),
@@ -121,13 +129,24 @@ class ParticipantsListComponents extends StatelessWidget {
                   CustomButtom(
                       title: 'Assign Task',
                       backgroudColor: CustomColors.accent1,
-                      function: () {
+                      function: () async {
                         Navigator.pop(context);
                         context.read<TaskProvider>().setUserToAddTask(user);
-                        Get.to(AddTaskView(), binding: AddTaskBiding());
+                        await Get.to(AddTaskView(), binding: AddTaskBiding());
+                        controller.getMeeting(meetingId);
                       }),
                   const SizedBox(height: 20),
-                  const CustomButtom(title: 'Remove Participant')
+                  Obx(
+                    () => CustomButtom(
+                      loading: controller.loadingUpdate.value,
+                      title: 'Remove Participant',
+                      function: () async => [
+                        await controller.removeParticipantFromMeeting(
+                            context, user.id),
+                        controller.getMeeting(meetingId)
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
