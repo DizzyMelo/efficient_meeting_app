@@ -31,6 +31,14 @@ class AddParticipantView extends GetView<AddParticipantController> {
               children: [
                 Material(
                   child: TypeAheadField(
+                    noItemsFoundBuilder: (context) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        'No user found!',
+                        textAlign: TextAlign.center,
+                        style: CustomTextStyles.textMedium,
+                      ),
+                    ),
                     textFieldConfiguration: TextFieldConfiguration(
                       autofocus: true,
                       style: CustomTextStyles.textMedium,

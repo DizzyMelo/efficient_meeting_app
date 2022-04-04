@@ -84,4 +84,39 @@ class MeetingClient extends ApiClient {
       rethrow;
     }
   }
+
+  Future<ResponseObject> removeTopicFromMeeting({
+    required String meetingId,
+    required String topicId,
+  }) async {
+    try {
+      var response = await super.post(
+        endpoint: "$_baseEndpoint/remove-topic/$meetingId/$topicId",
+        body: {},
+        serializer: UpdateMeetingResponse.fromJson,
+      );
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseObject> updateTopicStatus({
+    required String meetingId,
+    required String topicId,
+    required bool completed,
+  }) async {
+    try {
+      var response = await super.post(
+        endpoint: "$_baseEndpoint/update-topic/$meetingId/$topicId",
+        body: {"completed": completed},
+        serializer: UpdateMeetingResponse.fromJson,
+      );
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

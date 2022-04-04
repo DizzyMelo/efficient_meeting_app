@@ -1,6 +1,8 @@
 import 'package:efficient_meeting_app/core/components/circular_button.dart';
 import 'package:efficient_meeting_app/core/components/custom_buttom.dart';
+import 'package:efficient_meeting_app/core/theme/colors.dart';
 import 'package:efficient_meeting_app/modules/add_topic/view.dart';
+import 'package:efficient_meeting_app/modules/meeting/details/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -11,8 +13,12 @@ import '../../../add_topic/binding.dart';
 
 class TopicsListComponents extends StatelessWidget {
   final List<Topic> topics;
-  const TopicsListComponents({Key? key, required this.topics})
-      : super(key: key);
+  final DetailMeetingController controller;
+  const TopicsListComponents({
+    Key? key,
+    required this.topics,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +55,7 @@ class TopicsListComponents extends StatelessWidget {
                       children: topics
                           .map(
                             (topic) => ListTile(
-                              onTap: () => complete(context),
+                              onTap: () => complete(context, topic),
                               title: Text(topic.name!),
                               trailing: topic.completed!
                                   ? const Icon(
@@ -68,23 +74,50 @@ class TopicsListComponents extends StatelessWidget {
     );
   }
 
-  complete(BuildContext context) {
+  complete(BuildContext context, Topic topic) {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
           return SizedBox(
-            height: 200,
+            height: 220,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    'Set this topic as covered!',
+                    topic.name!,
                     style: CustomTextStyles.textMedium,
                   ),
                   const SizedBox(height: 20),
-                  const CustomButtom(title: 'Topic Completed')
+                  topic.completed!
+                      ? const Icon(
+                          LineIcons.checkCircle,
+                          color: Colors.green,
+                          size: 70,
+                        )
+                      : Column(
+                          children: [
+                            Obx(
+                              () => CustomButtom(
+                                loading: controller.loadingUpdateStatus.value,
+                                title: 'Set Topic Completed',
+                                backgroudColor: CustomColors.accent1,
+                                function: () => controller.updateTopicStatus(
+                                    context, topic.id!, !topic.completed!),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Obx(
+                              () => CustomButtom(
+                                loading: controller.loadingUpdate.value,
+                                title: 'Remove Topic',
+                                function: () => controller
+                                    .removeTopicFromMeeting(context, topic.id!),
+                              ),
+                            )
+                          ],
+                        )
                 ],
               ),
             ),
