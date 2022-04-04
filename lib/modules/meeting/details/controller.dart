@@ -19,8 +19,8 @@ class DetailMeetingController extends GetxController {
 
   final meetingClient = MeetingClient();
 
-  getMeeting(String meetingId) async {
-    loading.value = true;
+  getMeeting(String meetingId, {shouldLoad = false}) async {
+    if (shouldLoad) loading.value = true;
     try {
       meetingResponseModel.value =
           await meetingClient.getOne(meetingId) as DetailMeetingResponseModel;
@@ -28,7 +28,7 @@ class DetailMeetingController extends GetxController {
       GeneralUtils.showMessage(
           message: 'Something went wrong when trying to add meeting!');
     } finally {
-      loading.value = false;
+      if (shouldLoad) loading.value = false;
     }
   }
 
@@ -104,6 +104,6 @@ class DetailMeetingController extends GetxController {
   void onInit() {
     super.onInit();
     meetingId.value = Get.arguments['meetingId'];
-    getMeeting(meetingId.value);
+    getMeeting(meetingId.value, shouldLoad: true);
   }
 }

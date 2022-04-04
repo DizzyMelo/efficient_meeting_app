@@ -1,4 +1,6 @@
+import 'package:efficient_meeting_app/modules/home/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../../core/components/custom_buttom.dart';
@@ -11,8 +13,12 @@ import '../../../../core/utils/general_utils.dart';
 class TaskListComponent extends StatelessWidget {
   final bool loading;
   final List<Task> tasks;
+  final HomeController controller;
   const TaskListComponent(
-      {Key? key, required this.tasks, required this.loading})
+      {Key? key,
+      required this.tasks,
+      required this.loading,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -90,10 +96,18 @@ class TaskListComponent extends StatelessWidget {
                           size: 70,
                           color: Colors.green,
                         )
-                      : CustomButtom(
-                          title: 'Set Task as Done!',
-                          backgroudColor: CustomColors.accent1,
-                          function: () {}),
+                      : Obx(
+                          () => CustomButtom(
+                            loading: controller.loadingUpdateTask.value,
+                            title: 'Set Task as Done!',
+                            backgroudColor: CustomColors.accent1,
+                            function: () async => [
+                              await controller.updateTaskStatus(
+                                  context, task.id!, !task.completed!),
+                              controller.getAllTasks(shouldLoad: true)
+                            ],
+                          ),
+                        ),
                   const SizedBox(height: 20),
                 ],
               ),

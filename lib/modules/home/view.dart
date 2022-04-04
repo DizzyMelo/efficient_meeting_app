@@ -81,6 +81,7 @@ class HomeView extends GetView<HomeController> {
                           loading: controller.loading.value,
                         )
                       : TaskListComponent(
+                          controller: controller,
                           loading: controller.loadingTasks.value,
                           tasks: controller.tasks,
                         ),
